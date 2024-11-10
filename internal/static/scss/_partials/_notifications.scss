@@ -1,0 +1,53 @@
+@use "sass:map";
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity:0;
+    transform:translateY(-100%);
+  }
+}
+
+
+
+$notifications: (
+error: (
+  color: #fff,
+  background: #eb6f92
+
+),
+warning: (
+  color: #000,
+  background: #f6c177
+),
+flash: (
+  color: #fff,
+  background: #31748f
+)
+);
+
+
+@layer utilities {
+
+  @each $type, $props in $notifications {
+    .notifications__#{$type} {
+      padding-inline: 1rem;
+      padding-block: 1rem;
+      padding: 1rem;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      @each $key, $val in $props{
+        #{$key}:#{$val};
+      }
+      &.show {
+        animation: fadeOut 500ms linear 5s forwards;
+      }
+    }
+  }
+
+}
+

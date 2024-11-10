@@ -1,0 +1,26 @@
+
+{{define "subject"}}New Email From: andrew-mccall.com {{end}}
+
+{{define "plainBody"}}
+
+From: {{ .Email }}
+
+Message: {{ .Message }}
+{{end}}
+
+{{ define "htmlBody"}}
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<b>From: </b> <p>{{.Email}}</p> <br /></br>
+<b>Message: </b><p>{{.Message}}</p></br>
+</body>
+
+</html>
+{{ end }}

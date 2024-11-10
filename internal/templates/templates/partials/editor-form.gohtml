@@ -1,0 +1,44 @@
+{{ define "editor-form" }}
+
+<form data-id="{{with .IntMap.PostID}}{{.}}{{end}}" action="{{with .StringMap.Action}}{{.}}{{else}}/admin/compose{{end}}" method="{{with .StringMap.Method}}{{.}}{{else}}POST{{end}}" enctype="multipart/form-data" class="editor-form" id="editorForm">
+    <input type="hidden" name="csrf_token" value="{{- .CSRFToken -}}">
+    <input type="file" name="file" id="fileSelect" style="visibility: hidden;" />
+    <div class="form-control">
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="{{with .Form.Values.Get "title"}}{{.}}{{end}}">
+        {{ with .Form.Errors.Get "title" }}
+        <small class="error">{{ . }}</small>
+        {{end}}
+    </div>
+    <div class="form-control">
+        <label for="slug">Slug:</label>
+        <input type="text" name="slug" id="slug" value="{{with .Form.Values.Get "slug"}}{{.}}{{end}}">
+        {{ with .Form.Errors.Get "slug" }}
+        <small class="error">{{ . }}</small>
+        {{end}}
+    </div>
+    <div class="form-control">
+    <label for="description">Description:</label>
+    <input type="text" name="description" id="description" value="{{with .Form.Values.Get "description"}}{{.}}{{end}}">
+        {{ with .Form.Errors.Get "description" }}
+        <small class="error">{{ . }}</small>
+        {{end}}
+    </div>
+    <div class="form-control">
+    <label for="featuredImage">Featured Image:</label>
+    <input type="file" name="featuredImage" id="featuredImage" value="{{with .Form.Values.Get "featuredImage"}}{{.}}{{end}}">
+        {{ with .Form.Errors.Get "featuredImage" }}
+        <small class="error">{{ . }}</small>
+        {{end}}
+    </div>
+<div id="editor" data-prev-content="{{with .Data.EditorContent}}{{.}}{{end}}">
+</div>
+    <div class="form-control">
+    <label for="submit">
+    <input type="submit" id="submit" name="submit" value="submit" />
+    </label>
+    </div>
+</form>
+<script defer type="text/javascript">
+</script>
+{{ end }}

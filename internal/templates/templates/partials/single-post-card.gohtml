@@ -1,0 +1,17 @@
+{{ define "single-post-card" }}
+        <article class="article-card" id="post-{{.ID}}">
+            <header>
+            <hgroup>
+            <h2><a href="/blog{{.Slug | unsafeHTML}}" title="{{.Title | unsafeHTML}}" aria-label="{{.Title | unsafeHTML }}">{{.Title | unsafeHTML}}</a></h2>
+            <p>{{.Description | unsafeHTML }}</p>
+            </hgroup>
+            </header>
+            <div class="article-card__meta">
+            <ul>
+            <li><strong>published: </strong>{{.CreatedAt | humanDate}}</li>
+            <li><strong>updated: </strong>{{.UpdatedAt | humanDate}}</li>
+            <li><strong>by: </strong>{{.UserId | fetchUser | unsafeHTML }}</li>
+            </ul>
+            </div>
+        </article>
+{{ end }}

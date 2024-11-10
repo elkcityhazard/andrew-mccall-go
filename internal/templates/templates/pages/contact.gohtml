@@ -1,0 +1,31 @@
+{{template "base" . }}
+
+{{define "title" }}
+{{with index .StringMap "PageTitle"}}{{.}}{{end}}
+{{end}}
+
+{{define "Content"}}
+<form method="POST" action="/contact">
+<input type="hidden" name="csrf_token" value="{{.CSRFToken}}" >
+<input type="hidden" name="username" value="">
+<div class="form-control">
+    <label for="email">Email: </label>
+    <input type="email" name="email" id="email" value="{{with .Form.Values.Get "email"}}{{. | unsafeHTML}}{{end}}">
+    {{ with .Form.Errors.Get "email"}}
+    <small class="error">{{.}}</small>
+    {{ end }}
+</div>
+<div class="form-control">
+    <label for="message">Message: </label>
+    <textarea name="message" id="message">{{with .Form.Values.Get "message"}}{{. | unsafeHTML}}{{end}}</textarea>
+    {{ with .Form.Errors.Get "message"}}
+    <small class="error">{{.}}</small>
+    {{ end }}
+</div>
+<div class="form-control">
+<input name="submit" type="submit" value="submit">
+</div>
+
+
+</form>
+{{end}}

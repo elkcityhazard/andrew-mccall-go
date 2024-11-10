@@ -1,0 +1,19 @@
+{{ define "main-nav" }}
+<nav class="main-nav">
+<div class="main-nav__left-align">
+<a href="/" title="link to: home page" aria-label="link to: home page">Home</a>
+{{ with .IsAuthenticated | eq true }}
+<a href="/admin" title="link to: admin page" aria-label="link to: admin page">Admin</a>
+{{ end }}
+<a href="/blog" title="link to: blog page" aria-label="link to: blog page">Blog</a>
+<a href="/resume" title="link to: resume page" aria-label="link to: resume page">Resume</a>
+<a href="/contact" title="link to: contact page" aria-label="link to: contact page">Contact</a>
+</div>
+{{ with .IsAuthenticated | ne true }}
+<div class="main-nav__right-align">
+<a href="/signup" title="link to: signup page" aria-label="link to: signup page">Signup</a>
+<a href="/login" title="link to: login page" aria-label="link to: login page">Login</a>
+</div>
+{{ end }}
+</nav>
+{{ end }}

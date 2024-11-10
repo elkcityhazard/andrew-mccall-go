@@ -1,0 +1,22 @@
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-inline-size: 100ch;
+  margin-inline: auto;
+  &__left-align {
+    margin-inline-start: 1rem;
+    margin-inline-end: auto;
+
+  }
+  &__right-align {
+    margin-inline-start: auto;
+    margin-inline-end: 1rem;
+
+  }
+  &__right-align a,
+  &__left-align a {
+    padding-inline: 0.25rem;
+    padding-block: 0.5rem;
+  }
+};

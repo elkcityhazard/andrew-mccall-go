@@ -1,0 +1,15 @@
+{{ define "notifications" }}
+<div class="notifications">
+{{ with .Flash }}
+<p class="notifications__flash show">{{.}}</p>
+{{ end }}
+{{ with .Error }}
+<p class="notifications__error show">{{.}}</p>
+{{ end }}
+{{ with .Warning }}
+<p class="notifications___warning show">{{.}}</p>
+{{ end }}
+
+</div>
+
+{{ end }}

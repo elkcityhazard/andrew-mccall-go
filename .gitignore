@@ -1,0 +1,11 @@
+Makefile
+docker-compose.yml
+.env
+**/environment
+dockerfile
+src/*
+src/**
+my.cnf
+uploads/**
+node_modules
+node_modules/**

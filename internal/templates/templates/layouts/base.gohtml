@@ -1,0 +1,14 @@
+{{ define "base"  }}
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head" . }}
+<main id="content">
+{{ block "post-header" . }} {{ end }}
+{{ template "Content" . }}
+
+</main>
+</body>
+
+</html>
+
+{{ end }}

@@ -1,0 +1,10 @@
+{{template "compose" . }}
+{{ define "title" }} {{with .StringMap.PageTitle}}{{.}}Page{{ end}}{{end}}
+
+
+{{- define "Content" -}}
+
+<section class="editor-wrap"> <!-- start editor wrap -->
+{{template "editor-form" .}}
+</section> <!--/end Editor Wrap -->
+{{- end -}}

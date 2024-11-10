@@ -1,0 +1,45 @@
+@use "sass:map";
+@use "../_modules/mixins" as mixins;
+.post-navigation {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns:repeat(auto-fit, minmax(100%,1fr));
+  max-width: 768px;
+  margin-inline: auto;
+  margin: auto;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  padding: 1rem;
+  place-items: center;
+  a {
+    position: relative;
+    &::before,
+    &::after {
+      display: inline-block;
+      font-size: 2rem;
+      position: absolute;
+      top: 50%;
+
+
+    }
+  &:first-of-type {
+    &::before {
+      content: "\00AB";
+      left: -1.5rem;
+      transform: translateY(-54%);
+
+    }
+  }
+  &:last-of-type {
+    &::before {
+      content: "\00BB";
+      left: calc(100% + 0.5rem);
+      transform: translateY(-54%);
+
+    }
+  }
+  }
+  @media screen and (min-width:map.get(mixins.$breakpoints, "phone")) {
+    grid-template-columns: repeat(auto-fit,minmax(0,1fr));
+  }
+}

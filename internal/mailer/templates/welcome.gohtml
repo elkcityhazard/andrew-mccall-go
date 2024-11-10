@@ -1,0 +1,35 @@
+{{define "subject"}}Welcome to andrew-mccall.com{{end}}
+
+{{define "plainBody"}}
+
+Hello, {{.Email}}!
+
+Ready to start writing your first post?
+
+You need to click this link in order to finish signing up: {{.ActivationLink}}
+
+Thanks,
+
+Andrew M McCall
+
+{{end}}
+
+{{ define "htmlBody"}}
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <p>Hi,{{.Email}}!</p>
+    <p>Ready to start writing your first post?</p>
+    <p>You need to click this link in order to finish signing up: <a href="{{.ActivationLink}}">Click Here</a>.</p>
+    <p>Thanks,</p>
+    <p>Andrew M McCall</p>
+</body>
+
+</html>
+{{ end }}

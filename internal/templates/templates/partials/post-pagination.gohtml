@@ -1,0 +1,12 @@
+{{ define "post-pagination" }}
+    <div class="post-navigation">
+        <a 
+            href="/blog?limit={{ calculateLimit .Limit .Offset .Count false }}&offset={{ calculateOffset .Limit .Offset .Count false }}">
+            Prev
+            </a>
+        <a 
+            href="/blog?limit={{ calculateLimit .Limit .Offset .Count true  }}&offset={{ calculateOffset .Limit .Offset .Count true }}">
+            Next
+            </a>
+    </div>
+{{ end}}

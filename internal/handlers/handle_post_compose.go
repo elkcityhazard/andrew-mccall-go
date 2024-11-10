@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/forms"
@@ -31,13 +32,19 @@ func (hr *HandlerRepo) HandlePostCompose(w http.ResponseWriter, r *http.Request)
 	formVals.MinLength("description", 1)
 	formVals.MinLength("editorDelta", 1)
 	if !formVals.Valid() {
-		fmt.Println(formVals.Errors)
+		cats, err := hr.conn.ListCategories()
+
+		if err != nil {
+			hr.app.SessionManager.Put(r.Context(), "error", "there was an error fetching the categories")
+		}
+
 		var stringMap = map[string]string{}
 		stringMap["pageTitle"] = "Compose"
 
 		var data = map[string]interface{}{}
 
 		data["EditorContent"] = formVals.Get("editorContent")
+		data["Categories"] = cats
 
 		render.RenderTemplate(w, r, "compose.gohtml", &models.TemplateData{
 			Form:      formVals,
@@ -60,12 +67,32 @@ func (hr *HandlerRepo) HandlePostCompose(w http.ResponseWriter, r *http.Request)
 	content.Content = formVals.Get("editorContent")
 	content.Delta = formVals.Get("editorDelta")
 
-	_, err = hr.conn.InsertEditorContent(content)
+	postID, err := hr.conn.InsertEditorContent(content)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	catId, err := strconv.ParseInt(formVals.Get("category"), 10, 64)
+
+	if err != nil {
+		hr.app.SessionManager.Put(r.Context(), "warning", "there was an error parsing the category")
+		http.Redirect(w, r.WithContext(r.Context()), "/admin", http.StatusSeeOther)
+		return
+	}
+
+	catJoinID, err := hr.conn.InsertCategoryPostJoin(&models.CategoryPostJoin{
+		CatID:  catId,
+		PostID: postID,
+	})
+	if err != nil {
+		hr.app.SessionManager.Put(r.Context(), "warning", "failed to save category")
+		http.Redirect(w, r.WithContext(r.Context()), "/admin", http.StatusSeeOther)
+		return
+	}
+
+	hr.app.SessionManager.Put(r.Context(), "flash", fmt.Sprintf("saved post with id: %d and joined with id: %d", postID, catJoinID))
 
 	http.Redirect(w, r.WithContext(r.Context()), "/admin", http.StatusSeeOther)
 

@@ -11,6 +11,11 @@
             <li><strong>published: </strong>{{.CreatedAt | humanDate}}</li>
             <li><strong>updated: </strong>{{.UpdatedAt | humanDate}}</li>
             <li><strong>by: </strong>{{.UserId | fetchUser | unsafeHTML }}</li>
+            {{ $categoryName := .ID | getCategoryName}}
+            {{ if ne $categoryName ""}}
+            <li><strong>category: </strong>{{ $categoryName | unsafeHTML }}</li>
+            {{ end }}
+
             </ul>
             </div>
         </article>

@@ -21,6 +21,12 @@ func (hr *HandlerRepo) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cat, err := hr.conn.GetCategoryByPostID(post.ID)
+
+	if err != nil {
+		cat = &models.Category{}
+	}
+
 	prevPost, err := hr.conn.GetNextPrevPost(post, false)
 
 	if err != nil {
@@ -41,6 +47,7 @@ func (hr *HandlerRepo) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 
 	var data = map[string]interface{}{}
 	data["Post"] = post
+	data["Category"] = cat
 	data["PrevPost"] = prevPost
 	data["NextPost"] = nextPost
 

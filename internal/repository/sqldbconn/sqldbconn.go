@@ -981,6 +981,8 @@ func (sdc *SQLDbConn) GetTotalCount(table string) (int, error) {
 		return count, nil
 	case err := <-errChan:
 		return 0, err
+	case <-ctx.Done():
+		return 0, ctx.Err()
 	}
 
 }

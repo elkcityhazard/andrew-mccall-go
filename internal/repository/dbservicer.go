@@ -23,4 +23,10 @@ type DBServicer interface {
 
 	//messages
 	InsertMessage(*models.ContactMsg) (int64, error)
+
+	//categories
+	InsertCategory(*models.Category) (int64, error)
+	InsertCategoryPostJoin(*models.CategoryPostJoin) (int64, error)
+	ListCategories() ([]*models.Category, error)
+	GetCategoryByPostID(postID int64) (*models.Category, error)
 }

@@ -1,5 +1,7 @@
 {{ define "editor-form" }}
 
+{{$currentCat := .Form.Values.Get "category"}}
+
 <form data-id="{{with .IntMap.PostID}}{{.}}{{end}}" action="{{with .StringMap.Action}}{{.}}{{else}}/admin/compose{{end}}" method="{{with .StringMap.Method}}{{.}}{{else}}POST{{end}}" enctype="multipart/form-data" class="editor-form" id="editorForm">
     <input type="hidden" name="csrf_token" value="{{- .CSRFToken -}}">
     <input type="file" name="file" id="fileSelect" style="visibility: hidden;" />
@@ -30,6 +32,20 @@
         {{ with .Form.Errors.Get "featuredImage" }}
         <small class="error">{{ . }}</small>
         {{end}}
+    </div>
+    <div class="form-control">
+    <label for="category">Category:</label>
+    <select name="category" id="category" value="{{.Form.Values.Get "category"}}">
+    <option value="">--Choose Category--</option>
+    {{with .Data.Categories}}
+    {{range . }}
+
+    {{$nameToLower := .Name | toLower}}
+    <option value="{{.ID}}"{{if eq $nameToLower $currentCat}} selected {{end }}>{{.Name}}</option>
+    {{ end }}
+    {{ end }}
+
+    </select>
     </div>
 <div id="editor" data-prev-content="{{with .Data.EditorContent}}{{.}}{{end}}">
 </div>

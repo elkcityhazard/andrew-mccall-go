@@ -6,6 +6,7 @@ import (
 	"html"
 	"html/template"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/repository/sqldbconn"
@@ -34,6 +35,17 @@ var tFuncs = template.FuncMap{
 	"fetchUser":          fetchUser,
 	"calculateLimit":     calculateLimit,
 	"calculateOffset":    calculateOffset,
+	"toLower":            strings.ToLower,
+	"getCategoryName":    getCategoryName,
+}
+
+func getCategoryName(id int64) string {
+	cat, err := templateRepo.GetCategoryByPostID(id)
+
+	if err != nil {
+		return ""
+	}
+	return cat.Name
 }
 
 func calculateLimit(limit, offset, count int, increment bool) int {

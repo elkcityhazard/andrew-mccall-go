@@ -1,0 +1,41 @@
+{{ define "admin-list-posts" }}
+
+{{$csrfToken := .CSRFToken}}
+
+{{ with.Data.Posts }}
+
+<table>
+<thead>
+<tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Created</th>
+    <th>Updated</th>
+    <th>Status</th>
+    <th>Edit</th>
+    <th>Delete</th>
+</tr>
+</head>
+<tbody>
+{{ range .}}
+<tr>
+<td>{{.ID}}</td>
+<td>{{.Title}}</td>
+<td>{{.CreatedAt | humanDate}}</td>
+<td>{{.UpdatedAt | humanDate}}</td>
+<td>{{.Status}}</td>
+<td><a href="/admin/compose/edit/{{.ID}}" title="Edit: {{.Title}}" aria-label="Edit: {{.Title}}">Edit</a></td>
+<td>
+<form method="POST" action="/admin/delete?id={{.ID}}">
+<input type="hidden" name="csrf_token" value="{{$csrfToken}}" />
+<input type="submit" value="DELETE" />
+</form>
+</td>
+</tr>
+{{ end }}
+</tbody>
+</table>
+
+{{ end }}
+
+{{ end }}

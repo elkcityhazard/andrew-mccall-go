@@ -1,0 +1,106 @@
+@layer typography {
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    font-family: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+      @if $i < 4 {
+      font-size: calc( 5 / #{$i} * 1rem);
+      word-wrap: break-word;;
+      line-height: 1.1;
+      } @else {
+      font-size: 1.5rem;
+      line-height: 1.5;
+      }
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+div,
+section,
+article,
+main,
+aside,
+header,
+footer,
+p,
+span,
+blockquote,
+cite,
+a,
+pre,
+code,
+samp,
+kbd,
+var,
+abbr,
+acronym,
+address,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+strong,
+em,
+small,
+big,
+i,
+b,
+u,
+s,
+strike,
+sup,
+sub,
+ins,
+del,
+mark,
+ruby,
+rt,
+rp {
+  font-size: 1rem;
+  font-family: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+p,
+ul,
+ol,
+blockquote {
+  margin-bottom: 1rem;
+  margin-block-end: 1rem;
+}
+
+blockquote {
+  border-left: 4px solid #e6e6e6;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  padding: 1rem;
+}
+
+a {
+  color: #f6c177;
+  &:focus,
+  &:focus-within {
+    outline: 2px dotted #c4a7e7;
+  }
+}
+
+#skipLink {
+  padding: 1rem;
+  text-transform: uppercase;
+  position: fixed;
+  left: -100%;
+  -moz-transition: 350ms ease;
+  -webkit-transition: 350ms ease;
+  transition: 350ms ease;
+  &:focus {
+    left: 0;
+  }
+}
+
+
+} // end @layer typography

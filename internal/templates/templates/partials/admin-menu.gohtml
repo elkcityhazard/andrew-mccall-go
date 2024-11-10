@@ -1,0 +1,14 @@
+{{ define "admin-menu" }}
+<aside class="admin-menu" id="adminMenu">
+   <h2>Admin Menu</h2>
+   {{with .Data.AdminMenu }}
+    <ul>
+    {{ range . }}
+        <li><a href="{{.URL}}" aria-label="{{.Title}}" title="{{.Title}}">{{.Title}}</a></li>
+    {{ end }}
+    </ul>
+   {{ end}}
+
+</aside>
+
+{{ end }}

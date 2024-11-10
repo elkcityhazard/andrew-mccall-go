@@ -1,0 +1,47 @@
+{{ template "base" . }}
+
+{{ define "title" }}
+{{- with .StringMap.Title -}} {{- . -}} {{- end -}}
+{{ end }}
+
+{{define "Content" }}
+<header>
+    <hgroup>
+    <h1>{{- with .StringMap.Title -}}{{- . -}}{{- end -}}</h1>
+    <p>Signup to get started publishing blog posts</p>
+    </hgroup>
+</header>
+<section class="signup-form">
+<form method="POST" action="/signup">
+<input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+<div class="form-control">
+<label for="email">Email: <input type="email" name="email" id="email" value="{{.Form.Values.Get "email"}}"></label>
+{{with .Form.Errors.Get "email" }}
+<small class="error">{{.}}</small>
+{{end}}
+</div>
+<div class="form-control">
+<label for="username">Username: <input type="text" name="username" id="username" value="{{.Form.Values.Get "username"}}"></label>
+{{with .Form.Errors.Get "username" }}
+<small class="error">{{.}}</small>
+{{end}}
+</div>
+<div class="form-control">
+<label for="password1">Password 1: <input type="password" name="password1" id="password1" value="{{.Form.Values.Get "password1"}}"></label>
+{{with .Form.Errors.Get "password1" }}
+<small class="error">{{.}}</small>
+{{end}}
+</div>
+<div class="form-control">
+<label for="password2">Password 2: <input type="password" name="password2" id="password2" value="{{.Form.Values.Get "password2"}}"></label>
+{{with .Form.Errors.Get "password2" }}
+<small class="error">{{.}}</small>
+{{end}}
+</div>
+<div class="form-control">
+<label for="submitBtn"><input type="submit" name="submitBtn" id="submitBtn" value="Submit"></label>
+</div>
+</form>
+</section>
+
+{{ end }}

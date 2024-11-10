@@ -1,0 +1,15 @@
+{{ define "admin"  }}
+<!DOCTYPE html>
+<html lang="en">
+{{ template "head" . }}
+
+<main id="content">
+{{ block "HeaderTitle" .}} {{ end}}
+{{ template "Content" . }}
+</div>
+</main>
+</body>
+
+</html>
+
+{{ end }}

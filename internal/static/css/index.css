@@ -1,0 +1,293 @@
+@charset "UTF-8";
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    margin-block: 0;
+    margin-inline: 0;
+    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
+  }
+  html {
+    background: #191724;
+    color: #e0def4;
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+}
+@layer layout {
+  #content {
+    margin-inline: auto;
+    margin: auto;
+    max-width: 100ch;
+    padding-block: 1rem;
+    padding-inline: 1rem;
+    padding: 1rem;
+  }
+}
+@layer typography {
+  h1 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: calc(5 / 1 * 1rem);
+    word-wrap: break-word;
+    line-height: 1.1;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: calc(5 / 2 * 1rem);
+    word-wrap: break-word;
+    line-height: 1.1;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: calc(5 / 3 * 1rem);
+    word-wrap: break-word;
+    line-height: 1.1;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  h4 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  h5 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  h6 {
+    font-family: Didot, "Bodoni MT", "Noto Serif Display", "URW Palladio L", P052, Sylfaen, serif;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    font-weight: normal;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+  }
+  div,
+  section,
+  article,
+  main,
+  aside,
+  header,
+  footer,
+  p,
+  span,
+  blockquote,
+  cite,
+  a,
+  pre,
+  code,
+  samp,
+  kbd,
+  var,
+  abbr,
+  acronym,
+  address,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  strong,
+  em,
+  small,
+  big,
+  i,
+  b,
+  u,
+  s,
+  strike,
+  sup,
+  sub,
+  ins,
+  del,
+  mark,
+  ruby,
+  rt,
+  rp {
+    font-size: 1rem;
+    font-family: Optima, Candara, "Noto Sans", source-sans-pro, sans-serif;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+  p,
+  ul,
+  ol,
+  blockquote {
+    margin-bottom: 1rem;
+    margin-block-end: 1rem;
+  }
+  blockquote {
+    border-left: 4px solid #e6e6e6;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    padding: 1rem;
+  }
+  a {
+    color: #f6c177;
+  }
+  a:focus, a:focus-within {
+    outline: 2px dotted #c4a7e7;
+  }
+  #skipLink {
+    padding: 1rem;
+    text-transform: uppercase;
+    position: fixed;
+    left: -100%;
+    -moz-transition: 350ms ease;
+    -webkit-transition: 350ms ease;
+    transition: 350ms ease;
+  }
+  #skipLink:focus {
+    left: 0;
+  }
+}
+@layer partials {
+  .article-card {
+    background: #1f1d2e;
+    box-shadow: -6px 0 0 0 #c4a7e7, -12px 0 0 0 #f6c177, -18px 0 0 0 #eb6f92;
+    margin-block-end: 1rem;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+  }
+  .article-card__meta ul {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    list-style-position: inside;
+    gap: 0.5rem;
+  }
+  .article-card__meta ul li:first-of-type {
+    list-style: none;
+  }
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-inline-size: 100ch;
+  margin-inline: auto;
+}
+.main-nav__left-align {
+  margin-inline-start: 1rem;
+  margin-inline-end: auto;
+}
+.main-nav__right-align {
+  margin-inline-start: auto;
+  margin-inline-end: 1rem;
+}
+.main-nav__right-align a, .main-nav__left-align a {
+  padding-inline: 0.25rem;
+  padding-block: 0.5rem;
+}
+
+.post-navigation {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  max-width: 768px;
+  margin-inline: auto;
+  margin: auto;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  padding: 1rem;
+  place-items: center;
+}
+.post-navigation a {
+  position: relative;
+}
+.post-navigation a::before, .post-navigation a::after {
+  display: inline-block;
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+}
+.post-navigation a:first-of-type::before {
+  content: "«";
+  left: -1.5rem;
+  transform: translateY(-54%);
+}
+.post-navigation a:last-of-type::before {
+  content: "»";
+  left: calc(100% + 0.5rem);
+  transform: translateY(-54%);
+}
+@media screen and (min-width: 350px) {
+  .post-navigation {
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+@layer utilities {
+  .notifications__error {
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    background: #eb6f92;
+  }
+  .notifications__error.show {
+    animation: fadeOut 500ms linear 5s forwards;
+  }
+  .notifications__warning {
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #000;
+    background: #f6c177;
+  }
+  .notifications__warning.show {
+    animation: fadeOut 500ms linear 5s forwards;
+  }
+  .notifications__flash {
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    background: #31748f;
+  }
+  .notifications__flash.show {
+    animation: fadeOut 500ms linear 5s forwards;
+  }
+}
+@layer base,layout,typography, partials, utilities;
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,12 @@
+{{ template "admin" . }}
+{{ define "title" }}
+{{with index .StringMap "PageTitle"}}{{.}}{{end}}
+{{ end }}
+{{ define "HeaderTitle"}}
+<h1>{{with index .StringMap "PageTitle"}}{{.}}{{end}}</h1>
+{{end}}
+{{ define "Content" }}
+{{template "admin-menu". }}
+{{template "admin-list-posts" . }}
+<!-- Create the editor container -->
+{{ end }}

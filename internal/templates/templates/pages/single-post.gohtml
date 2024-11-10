@@ -1,0 +1,42 @@
+{{ template "base" . }}
+
+{{ define "title" }}
+{{ $title := index .StringMap "PageTitle" }}
+{{$title | unsafeHTML}}
+{{ end }}
+
+{{ define "post-header"  }}
+{{ $title := index .StringMap "PageTitle" | unsafeHTML }}
+<header class="post-header">
+<hgroup>
+<h1 id="title">{{ $title }}</h1>
+{{ with .StringMap }}<p>{{with .PageDescription}}{{ . | unsafeHTML }}{{end}}</p> {{ end }}
+</hgroup>
+{{ with .Data.Post }}
+{{template "article-card-meta" . }}
+{{ end }}
+</header>
+{{ end }}
+
+{{ define "Content" }}
+{{ with .Data.Post }}
+{{ .Content | parseEditorContent }}
+
+{{end}}
+<div class="post-navigation">
+{{with .Data.PrevPost}}
+{{ $id := .ID}}
+{{$title := .Title }}
+{{if .Slug}}
+<a href="/blog{{.Slug}}" data-id={{$id}} class="post-navigation__prev" itemprop="relatedLink" aria-label="previous post: {{if $title}}{{$title}}{{else}}Next{{end}}"title="prevous post: {{if $title}}{{$title}}{{else}}Next{{end}}">{{if $title}}{{$title}}{{else}}Prev{{end}}</a>
+{{end}}
+{{ end }}
+{{with .Data.NextPost }}
+{{ $id := .ID}}
+{{$title := .Title }}
+{{if .Slug}}
+<a href="/blog{{.Slug}}" data-id="{{$id}}" class="post-navigation__next" itemprop="relatedLink" aria-label="next post: {{if $title}}{{$title}}{{else}}Next{{end}}" title="next post: {{if $title}}{{$title}}{{else}}Next{{end}}">{{if $title}}{{$title}}{{else}}Next{{end}}</a>
+{{end}}
+{{ end }}
+</div>
+{{ end }}

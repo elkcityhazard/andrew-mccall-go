@@ -1,0 +1,19 @@
+{{template "base" . }}
+
+{{ define "title" }}
+{{ with index .StringMap "PageTitle"}}{{.}}{{end}}
+{{ end }}
+
+{{define "Content"}}
+    <h1>{{with index .StringMap "PagTitle"}}{{.}}{{else}}Blog{{end}}</h1>
+    {{ with .Data.Posts }}
+    <section id="recentPosts">
+        {{ range . }}
+        {{ template "single-post-card" . }}
+        {{ end }}
+    </section>
+    {{ end }}
+    {{ with .IntMap }}
+    {{template "post-pagination" . }}
+    {{end}}
+{{end}}

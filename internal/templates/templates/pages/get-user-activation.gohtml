@@ -1,0 +1,19 @@
+{{template "base" . }}
+
+{{ define "title" }}
+{{with index .StringMap "PageTitle"}}
+{{.}}
+{{end}}
+{{ end }}
+
+{{ define "Content" }}
+<p>Welcome, {{.Data.User.Email}}!</p>
+<p>To finish signing up, you need to activate your account:</p>
+<form method="POST" action="/users/activation">
+<input type="hidden" name="csrf_token" value="{{.CSRFToken}}" />
+<input type="hidden" name="token" value="{{.Data.ActivationToken.Plaintext}}" />
+<input type="hidden" name="id" value="{{.Data.User.ID}}" />
+<input type="submit" value="activate now">
+
+</form>
+{{ end }}

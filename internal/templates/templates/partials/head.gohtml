@@ -1,0 +1,16 @@
+{{define "head" }}
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> {{with index .StringMap "PageTitle"}}{{.}}{{else}}-{{end}} | {{.SiteTitle }}</title>
+<meta name="description" content="{{with .Data.Post}}{{.Description}}{{end}}">
+<link rel="stylesheet" href="/static/css/index.css">
+{{ with .IsAuthenticated }}
+{{ end }}
+ {{template "scripts" . }}
+</head>
+<body>
+<a href="#content" tabindex="1" id="skipLink">Skip To Content</a>
+{{template "main-nav" . }}
+{{ template "notifications" . }}
+{{ end }}

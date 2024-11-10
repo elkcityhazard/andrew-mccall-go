@@ -1,0 +1,39 @@
+{{template "base" . }}
+
+{{ define "title"  }}
+{{- with .StringMap.Title -}} {{- . -}} {{- end -}}
+{{ end }}
+
+{{define "Content" }}
+
+<header>
+    <hgroup>
+    <h1>{{- with .StringMap.Title -}}{{- . -}}{{- end -}}</h1>
+    <p>Login</p>
+    </hgroup>
+</header>
+<section>
+<form id="login" method="post" action="/login">
+    <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{ .Form.Values.Get "email"}}">
+        {{ with .Form.Errors.Get "email" }}
+        <small class="error">{{ . }}</small>
+        {{ end }}
+    </div>
+    <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" value="{{ .Form.Values.Get "password" }}">
+        {{ with .Form.Errors.Get "password" }}
+        <small class="error">{{ . }}</small>
+        {{ end }}
+    </div>
+    <div class="form-control">
+    <label for="submit"></label>
+    <input type="hidden" name="csrf_token" value="{{- .CSRFToken -}}">
+    <input type="submit" name="submit" id="submit" value="login">
+    </div>
+
+</form>
+</section>
+{{ end }}

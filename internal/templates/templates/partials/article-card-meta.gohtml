@@ -1,0 +1,9 @@
+{{define "article-card-meta"}}
+    <div class="article-card__meta">
+        <ul>
+            <li><strong>published: </strong>{{.CreatedAt | humanDate}}</li>
+            <li><strong>updated: </strong>{{.UpdatedAt | humanDate}}</li>
+            <li><strong>by: </strong>{{.UserId | fetchUser | unsafeHTML }}</li>
+        </ul>
+    </div>
+{{end}}

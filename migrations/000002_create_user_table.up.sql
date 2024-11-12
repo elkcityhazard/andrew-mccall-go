@@ -17,17 +17,17 @@ create table users (
     id bigint primary key AUTO_INCREMENT,
     email varchar(140) unique not null,
     username varchar(140) unique not null,
-    password bigint  not null,
+    password bigint not null default 0,
     created_at datetime not null default CURRENT_TIMESTAMP,
     updated_at datetime not null default CURRENT_TIMESTAMP,
     is_active boolean not null default false,
     role ENUM('super_admin', 'admin','user','commenter') not null default 'user',
     version bigint not null default 1,
-    CONSTRAINT fk_password foreign key (password) references passwords(id) on delete cascade
+    constraint fk_user_password_id foreign key (password) references passwords(id) on delete cascade
 );
 
 
-create index users_pw_idx on users (email,password);
+create index users_pw_idx on users (email);
 
 insert into
 users

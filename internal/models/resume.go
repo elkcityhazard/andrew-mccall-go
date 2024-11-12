@@ -10,52 +10,50 @@ type Resume struct {
 	SocialMedias
 	Objective
 	SkillList
-	PastEmployment
+	EmploymentList
 	EducationList
 	AwardsList
-	References
+	ReferenceList
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
 }
 
-type Reference struct {
-	ID           int64
-	userID       int64
-	ReferencesID int64
-	FirstName    string
-	LastName     string
-	Email        string
-	PhoneNumber  string
-	JobTitle     string
-	Organization string
-	Type         string
-	Address1     string
-	Address2     string
-	City         string
-	State        string
-	Zipcode      string
-	Description  string
+type ReferenceItem struct {
+	ID              int64
+	ReferenceListID int64
+	FirstName       string
+	LastName        string
+	Email           string
+	PhoneNumber     string
+	JobTitle        string
+	Organization    string
+	Type            string
+	Address1        string
+	Address2        string
+	City            string
+	State           string
+	Zipcode         string
+	Content         string
 }
 
-type References struct {
+type ReferenceList struct {
 	ID            int64
 	UserID        int64
 	ResumeID      int64
-	ReferenceList []Reference
+	ReferenceList []ReferenceItem
 	CreatedAt     time.Time
 	UpdatedAt     time.Time
 	Version       int
 }
 
-type Award struct {
+type AwardItem struct {
 	ID               int64
-	UserID           int64
-	ResumeID         int64
+	AwardListID      int64
 	Title            string
 	OrganizationName string
 	Year             time.Time
-	Summary          string
+	Content          string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	Version          int
@@ -65,7 +63,7 @@ type AwardsList struct {
 	ID        int64
 	UserID    int64
 	ResumeID  int64
-	Awards    []Award
+	Awards    []AwardItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -73,15 +71,14 @@ type AwardsList struct {
 
 type EducationList struct {
 	ID        int64
-	UserID    int64
 	ResumeID  int64
-	Education []Education
+	Education []EducationItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
 }
 
-type Education struct {
+type EducationItem struct {
 	ID        int64
 	UserID    int64
 	ResumeID  int64
@@ -97,7 +94,7 @@ type Education struct {
 	Version   int
 }
 
-type Employer struct {
+type EmploymentListItem struct {
 	ID               int64
 	UserID           int64
 	PastEmploymentID int64
@@ -111,11 +108,11 @@ type Employer struct {
 	Version          int
 }
 
-type PastEmployment struct {
+type EmploymentList struct {
 	ID        int64
 	UserID    int64
 	ResumeID  int64
-	Employers []Employer
+	Employers []EmploymentListItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -136,8 +133,9 @@ type SkillListItem struct {
 	ID          int64
 	UserID      int64
 	SKillListID int64
+	Title       string
 	Content     string
-	Duration    time.Duration
+	Duration    int
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	Version     int
@@ -156,6 +154,7 @@ type Objective struct {
 type SocialMedias struct {
 	ID           int64
 	UserID       int64
+	ResumeID     int64
 	SocialMedias []SocialMedia
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
@@ -163,15 +162,15 @@ type SocialMedias struct {
 }
 
 type SocialMedia struct {
-	ID          int64
-	UserID      int64
-	ResumeID    int64
-	CompanyName string
-	UserName    string
-	WebAddress  string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	Version     int
+	ID              int64
+	UserID          int64
+	SocialMediaList int64
+	CompanyName     string
+	UserName        string
+	WebAddress      string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	Version         int
 }
 
 type ContactDetail struct {

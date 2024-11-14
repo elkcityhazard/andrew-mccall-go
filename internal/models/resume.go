@@ -7,7 +7,7 @@ type Resume struct {
 	UserID   int64
 	JobTitle string
 	ContactDetail
-	SocialMedias
+	SocialMediaList
 	Objective
 	SkillList
 	EmploymentList
@@ -17,6 +17,14 @@ type Resume struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
+}
+
+func NewResume() *Resume {
+	return &Resume{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type ReferenceItem struct {
@@ -35,16 +43,34 @@ type ReferenceItem struct {
 	State           string
 	Zipcode         string
 	Content         string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	Version         int
+}
+
+func NewReferenceItem() *ReferenceItem {
+	return &ReferenceItem{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type ReferenceList struct {
 	ID            int64
-	UserID        int64
 	ResumeID      int64
 	ReferenceList []ReferenceItem
 	CreatedAt     time.Time
 	UpdatedAt     time.Time
 	Version       int
+}
+
+func NewReferenceList() *ReferenceList {
+	return &ReferenceList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type AwardItem struct {
@@ -59,14 +85,29 @@ type AwardItem struct {
 	Version          int
 }
 
+func NewAwardItem() *AwardItem {
+	return &AwardItem{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type AwardsList struct {
 	ID        int64
-	UserID    int64
 	ResumeID  int64
 	Awards    []AwardItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
+}
+
+func NewAwardsList() *AwardsList {
+	return &AwardsList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type EducationList struct {
@@ -78,26 +119,41 @@ type EducationList struct {
 	Version   int
 }
 
+func NewEducationList() *EducationList {
+	return &EducationList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type EducationItem struct {
-	ID        int64
-	UserID    int64
-	ResumeID  int64
-	Name      string
-	Degree    string
-	Address1  string
-	Address2  string
-	City      string
-	State     string
-	Zipcode   string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	Version   int
+	ID              int64
+	EducationListID int64
+	Name            string
+	DegreeYear      time.Time
+	Degree          string
+	Address1        string
+	Address2        string
+	City            string
+	State           string
+	Zipcode         string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	Version         int
+}
+
+func NewEducationItem() *EducationItem {
+	return &EducationItem{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type EmploymentListItem struct {
 	ID               int64
-	UserID           int64
-	PastEmploymentID int64
+	EmploymentListID int64
 	Title            string
 	From             time.Time
 	To               time.Time
@@ -108,9 +164,16 @@ type EmploymentListItem struct {
 	Version          int
 }
 
+func NewEmploymentListItem() *EmploymentListItem {
+	return &EmploymentListItem{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type EmploymentList struct {
 	ID        int64
-	UserID    int64
 	ResumeID  int64
 	Employers []EmploymentListItem
 	CreatedAt time.Time
@@ -118,9 +181,16 @@ type EmploymentList struct {
 	Version   int
 }
 
+func NewEmploymentList() *EmploymentList {
+	return &EmploymentList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type SkillList struct {
 	ID        int64
-	UserID    int64
 	ResumeID  int64
 	Title     string
 	Items     []SkillListItem
@@ -129,21 +199,35 @@ type SkillList struct {
 	Version   int
 }
 
+func NewSkillList() *SkillList {
+	return &SkillList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type SkillListItem struct {
 	ID          int64
-	UserID      int64
 	SKillListID int64
 	Title       string
 	Content     string
-	Duration    int
+	Duration    time.Time
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	Version     int
 }
 
+func NewSkillListItem() *SkillListItem {
+	return &SkillListItem{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
 type Objective struct {
 	ID        int64
-	UserID    int64
 	ResumeID  int64
 	Content   string
 	CreatedAt time.Time
@@ -151,31 +235,52 @@ type Objective struct {
 	Version   int
 }
 
-type SocialMedias struct {
-	ID           int64
-	UserID       int64
-	ResumeID     int64
-	SocialMedias []SocialMedia
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
-	Version      int
+func NewObjective() *Objective {
+	return &Objective{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
-type SocialMedia struct {
-	ID              int64
-	UserID          int64
-	SocialMediaList int64
-	CompanyName     string
-	UserName        string
-	WebAddress      string
-	CreatedAt       time.Time
-	UpdatedAt       time.Time
-	Version         int
+type SocialMediaList struct {
+	ID                   int64
+	ResumeID             int64
+	SocialMediaListItems []SocialMediaListItems
+	CreatedAt            time.Time
+	UpdatedAt            time.Time
+	Version              int
+}
+
+func NewSocialMediaList() *SocialMediaList {
+	return &SocialMediaList{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
+}
+
+type SocialMediaListItems struct {
+	ID                int64
+	SocialMediaListID int64
+	CompanyName       string
+	UserName          string
+	WebAddress        string
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
+	Version           int
+}
+
+func NewSocialMediaListItems() *SocialMediaListItems {
+	return &SocialMediaListItems{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }
 
 type ContactDetail struct {
 	ID           int64
-	UserID       int64
 	ResumeID     int64
 	Firstname    string
 	Lastname     string
@@ -190,4 +295,12 @@ type ContactDetail struct {
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 	Version      int
+}
+
+func NewContactDetail() *ContactDetail {
+	return &ContactDetail{
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		Version:   1,
+	}
 }

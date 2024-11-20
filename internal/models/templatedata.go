@@ -41,6 +41,11 @@ func (td *TemplateData) PopulateAdminMenu() {
 		Title: "Manage Categories",
 	})
 
+	menu = append(menu, &MenuItem{
+		URL:   "/admin/resume",
+		Title: "Edit Resume",
+	})
+
 	if td.Data == nil {
 		td.Data = make(map[string]any)
 	}

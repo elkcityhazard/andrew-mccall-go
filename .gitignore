@@ -9,3 +9,4 @@ my.cnf
 uploads/**
 node_modules
 node_modules/**
+bin/**

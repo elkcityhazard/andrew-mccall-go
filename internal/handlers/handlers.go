@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/config"
+	"github.com/elkcityhazard/andrew-mccall-go/internal/forms"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/models"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/render"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/repository"
@@ -58,4 +59,13 @@ func (hr *HandlerRepo) HomeGetHandler(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, r, "home.gohtml", td)
 	return
 
+}
+
+func (hr *HandlerRepo) CreateEmptyTemplatePayload() (map[string]any, map[string]string, map[string]int, *forms.Form) {
+	dataMap := make(map[string]any)
+	stringMap := make(map[string]string)
+	intMap := make(map[string]int)
+	form := forms.New(nil)
+
+	return dataMap, stringMap, intMap, form
 }

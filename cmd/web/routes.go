@@ -118,6 +118,9 @@ func routes() http.Handler {
 	rtr.New("GET", "/admin/compose/edit/([0-9]+)", handlers.Repo.HandleGetEditCompose, requiresAuth)
 	rtr.New("PUT", "/admin/compose/edit/([0-9]+)", handlers.Repo.HandlePutCompose, requiresAuth, returnsJSON)
 
+	// resume crud
+	rtr.New("GET", "/admin/resume", handlers.Repo.HandleGetAdminResume, requiresAuth)
+
 	// Admin Manage Categories
 	rtr.New("GET", "/admin/categories", handlers.Repo.HandleGetAdminCategories, requiresAuth)
 

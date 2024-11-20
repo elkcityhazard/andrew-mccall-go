@@ -160,6 +160,11 @@
     left: 0;
   }
 }
+@layer base {
+  input:user-invalid {
+    outline: 2px solid red;
+  }
+}
 @layer partials {
   .article-card {
     background: #1f1d2e;

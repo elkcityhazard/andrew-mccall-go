@@ -1,0 +1,67 @@
+{{define "resume-employment-list"}}
+<fieldset id="employmentList" class="resume">
+    <legend class="resume">Employment History</legend>
+    <!-- form row -->
+    <div class="form-row">
+        <!-- form control -->
+        <div class="form-control">
+            <label for="resume_employment-list_title">Employer Title: </label>
+            <input type="text" name="resume_employment-list_title" id="resume_employment-list_title" value="{{.Form.Values.Get "resume_employment-list_title"}}">
+            {{ with .Form.Errors.Get "resume_employment-list_title"}}
+            {{ range . }}
+                <small class="error">{{.}}</small>
+            {{end}}
+            {{ end }}
+        </div>
+        <!--/form control-->
+        <!-- form control -->
+        <div class="form-control">
+            <label for="resume_employment-list_from_date">From: </label>
+            <input type="text" name="resume_employment-list_from_date" id="resume_employment-list_from_date" value="{{.Form.Values.Get "resume_employment-list_from_date"}}">
+            {{ with .Form.Errors.Get "resume_employment-list_from_date"}}
+            {{ range . }}
+                <small class="error">{{.}}</small>
+            {{end}}
+            {{ end }}
+        </div>
+        <!--/form control-->
+        <!-- form control -->
+        <div class="form-control">
+            <label for="resume_employment-list_to_date">To: </label>
+            <input type="text" name="resume_employment-list_to_date" id="resume_employment-list_to_date" value="{{.Form.Values.Get "resume_employment-list_to_date"}}">
+            {{ with .Form.Errors.Get "resume_employment-list_to_date"}}
+            {{ range . }}
+                <small class="error">{{.}}</small>
+            {{end}}
+            {{ end }}
+        </div>
+        <!--/form control-->
+        <!-- form control -->
+        <div class="form-control">
+            <label for="resume_employment-list_job_title">Job Title: </label>
+            <input type="text" name="resume_employment-list_job_title" id="resume_employment-list_job_title" value="{{.Form.Values.Get "resume_employment-list_job_title"}}">
+            {{ with .Form.Errors.Get "resume_employment-list_job_title"}}
+            {{ range . }}
+                <small class="error">{{.}}</small>
+            {{end}}
+            {{ end }}
+        </div>
+        <!--/form control-->
+        <!-- form control -->
+        <div class="form-control">
+            <label for="resume_employment-list_summary">Summary: </label>
+            <input type="text" name="resume_employment-list_summary" id="resume_employment-list_summary" value="{{.Form.Values.Get "resume_employment-list_summary"}}">
+            {{ with .Form.Errors.Get "resume_employment-list_summary"}}
+            {{ range . }}
+                <small class="error">{{.}}</small>
+            {{end}}
+            {{ end }}
+        </div>
+        <!--/form control-->
+
+    
+    </div>
+    <button id="employmentListBtn">Add Row</button>
+    <!--/form row -->
+</fieldset>
+{{ end }}

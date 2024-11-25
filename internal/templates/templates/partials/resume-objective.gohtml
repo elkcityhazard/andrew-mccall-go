@@ -1,0 +1,24 @@
+{{define "resume-objective"}}
+<!-- resume objective -->
+<fieldset id="resumeObjective" class="resume">
+<legend class="resume">Resume Objective</legend>
+<div class="form-row"> <!-- form row -->
+<div class="form-control">
+<label for="resume_objective">Objective: </label>
+<textarea 
+name="resume_objective" 
+id="resume_objective">
+{{.Form.Values.Get "resume_objective"}}
+</textarea>
+{{ with .Form.Errors.Get "resume_objective"}}
+    {{range .}}
+    <small class="error">{{.}}</small>
+    {{end}}
+{{end}}
+</div>
+
+</div> <!--/form row -->
+
+</fieldset>
+<!--/resume objective -->
+{{end}}

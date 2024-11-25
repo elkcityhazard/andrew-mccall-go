@@ -2,12 +2,35 @@ class Resume {
   constructor(formID = "") {
     this.formID = formID || null;
     this.form = document.getElementById(formID) || null;
+    this.btnIds = ["#socialMediaBtn", "#skillListBtn", "#employmentListBtn"];
     if (!this.formID || !this.form) return null;
 
     this.events();
   }
 
-  events() {}
+  events() {
+    for (let btn of this.btnIds) {
+      this.form
+        .querySelector(btn)
+        .addEventListener("click", this.addNewRow.bind(this));
+    }
+  }
+
+  addNewRow(e) {
+    e.preventDefault();
+    var formRow = e.target?.previousElementSibling;
+    var clonedRow = formRow.cloneNode(true);
+
+    // reset values on new row
+    clonedRow.querySelectorAll("input")?.forEach((input) => (input.value = ""));
+
+    var fieldset = e.target.closest("fieldset");
+    // button is last child so subtract 1
+    return fieldset.insertBefore(
+      clonedRow,
+      fieldset.children[fieldset.children.length - 1],
+    );
+  }
 
   /**
    * *

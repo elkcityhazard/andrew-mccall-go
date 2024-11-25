@@ -1,0 +1,168 @@
+{{ define "resume-contact-detail" }}
+<fieldset id="contactDetails" class="resume" data-name="contact-details" data-id="0">
+    <legend class="resume">Contact Details</legend>
+    <!-- form row -->
+    <div class="form-row">
+        <!-- first name -->
+        <div class="form-control">
+                <label for="resume_contact-details_firstname">First Name: </label>
+                <input 
+                type="text" 
+                id="resume_contact-details_firstname" 
+                name="resume_contact-details_firstname"
+                value="{{.Form.Values.Get "resume_contact-details_firstname" }}"
+                >
+                {{ with .Form.Errors.Get "resume_contact-details_firstname"}}
+                    {{ range . }}
+                    <small class="error">{{.}}</small>
+                    {{ end }}
+                {{ end  }}
+        </div>
+        <!--/first name -->
+
+        <!-- last name -->
+        <div class="form-control">
+            <label for="resume_contact-details_lastname">Last Name: </label>
+            <input 
+            type="text"
+            name="resume_contact-details_lastname"
+            id="resume_contact-details_lastname"
+            value="{{.Form.Values.Get "resume_contact-details_lastname"}}"
+            >
+            {{with .Form.Errors.Get "resume_contact-details_lastname"}}
+                {{range . }}
+                <small class="error">{{.}}</small>
+                {{ end }}
+            {{end}}
+            </div>
+        <!--/last name -->
+    </div>
+    <!--/form-row -->
+
+    <!-- form row -->
+        <div class="form-row">
+        <!-- address line 1 -->
+        <div class="form-control">
+            <label for="resume_contact-details_address1">Address #1: </label>
+            <input 
+            type="text"
+            name="resume_contact-details_address1"
+            id="resume_contact-details_address1"
+            value="{{.Form.Values.Get "resume_contact-details_address1" }}"
+            >
+            {{ with .Form.Errors.Get "resume_contact-details_address1"}}
+                {{ range . }}
+                <small class="error">{{.}}</small>
+                {{ end }}
+            {{ end }}
+            </div>
+        <!--/address line 1 -->
+        <!-- address line 2 -->
+        <div class="form-control">
+            <label for="resume_contact-details_address2">Address #2: </label>
+            <input 
+            type="text"
+            name="resume_contact-details_address2"
+            id="resume_contact-details_address2"
+            value="{{.Form.Values.Get "resume_contact-details_address2" }}"
+            >
+            {{ with .Form.Errors.Get "resume_contact-details_address2"}}
+                {{ range . }}
+                <small class="error">{{.}}</small>
+                {{ end }}
+            {{ end }}
+            </div>
+        <!--/address line 2 -->
+
+        </div>
+    <!--/form row -->
+
+                <!-- form row -->
+        <div class="form-row">
+            <!-- city -->
+            <div class="form-control">
+                <label for="resume_contact-details_city">City:</label>
+                <input 
+                type="text"
+                name="resume_contact-details_city"
+                id="resume_contact-details_city"
+                value="{{.Form.Values.Get "resume_contact-details_city" }}"
+                >
+                </div>
+            <!--/city -->
+
+            <!-- state -->
+            <div class="form-control">
+                <label for="resume_contact-details_state">State: </label>
+                <input 
+                type="text"
+                name="resume_contact-details_state"
+                id="resume_contact-details_state"
+                value="{{.Form.Values.Get "resume_contact-details_state"}}"
+                >
+                {{ with .Form.Errors.Get "resume_contact-details_state" }}
+                    {{ range . }}
+                    <small class="error">{{.}}</small>
+                    {{ end }}
+                {{ end }}
+                </div>
+                <!--/state -->
+
+                <!-- zipcode -->
+            <div class="form-control">
+                <label for="resume_contact-details_zipcode">Zipcode: </label>
+                <input type="text"
+                name="resume_contact-details_zipcode"
+                id="resume_contact-details_zipcode"
+                value="{{.Form.Values.Get "resume_contact-details_zipcode" }}"
+                >
+                {{ with .Form.Errors.Get "resume_contact-details_zipcode" }}
+                    {{ range . }}
+                    <small class="error">{{.}}</small>
+                    {{ end }}
+
+                {{ end }}
+                </div>
+                <!--/zipcode -->
+        </div>
+        <!--/form row -->
+        <!-- form row -->
+        <div class="form-row">
+        <!-- email -->
+        <div class="form-control">
+            <label for="resume_contact-details_email">Email:</label>
+            <input 
+            type="email"
+            name="resume_contact-details_email"
+            id="resume_contact-details_email"
+            value="{{.Form.Values.Get "resume_contact-details_email" }}"
+            >
+            {{ with .Form.Errors.Get "resume_contact-details_email" }}
+                {{ range . }}
+                <small class="error">{{.}}</small>
+                {{ end }}
+            {{ end }}
+            </div>
+        <!--/email -->
+
+        <!-- phone -->
+        <div class="form-control">
+            <label for="resume_contact-details_phone">Phone: </label>
+            <input 
+            type="text"
+            name="resume_contact-details_phone"
+            id="resume_contact-details_phone"
+            value="{{.Form.Values.Get "resume_contact-details_phone" }}"
+            >
+            {{ with .Form.Errors.Get "resume_contact-details_phone" }}
+                {{ range . }}
+                    <small class="error">{{.}}</small>
+                {{ end }}
+            {{ end }}
+            </div>
+        <!--/phone -->
+        </div>
+
+        <!--/form row -->
+</fieldset>
+{{ end }}

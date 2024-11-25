@@ -313,10 +313,9 @@
                   "autocomplete": "off"
                 }
               }
-            ],
+            ]
           }
         ]
-
       }
     },
     "employment_list": {
@@ -794,5 +793,6 @@
           }
         ]
       }
+    }
   }
 }

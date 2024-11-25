@@ -1,5 +1,67 @@
 @layer base {
-  input {
+  fieldset {
+    border: 1px solid #524f67;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+    padding-inline: 1rem;
+    padding-block: 1rem;
+    padding: 1rem;
+    button {
+      background: #ebbcba;
+      color: #191724;
+      cursor: pointer;
+      text-transform: uppercase;
+      border: 1px solid #31748f;
+      padding-block: calc(6 / 16 * 1rem);
+      padding-inline: calc(6 / 16 * 1rem);
+      padding: calc(6 / 16 * 1rem);
+      &:hover,
+      &:active,
+      &:focus {
+        background: #fff;
+        border-color: #6e6a86;
+        color: #191724;
+      }
+    }
+  }
+  legend {
+    font-size: 0.85rem;
+    padding-inline: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .form-control {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-block-end: calc(6 / 16 * 1rem);
+    margin-bottom: calc(6 / 16 * 1rem);
+
+  }
+  label {
+    margin-block-end: inherit;
+    margin-bottom: inherit;
+  }
+
+  input,
+  textarea{
+    border: 1px solid #21202e;
+    background: #21202e;
+    color: #e0def4;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-block: calc(4 / 16 * 1rem);
+    padding-inline: calc(4 / 16 * 1rem);
+    padding: calc(4 / 16 * 1rem);
+    &:focus {
+      outline:1px solid #f6c177;
+    }
     &:user-invalid {
       outline: 2px solid red;
     }

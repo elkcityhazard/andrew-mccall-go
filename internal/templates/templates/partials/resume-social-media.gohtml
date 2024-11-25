@@ -1,0 +1,63 @@
+{{ define "resume-social-media" }}
+<fieldset class="resume" data-name="social-media" data-id="0">
+    <legend class="resume">Social Media List</legend>
+    <!-- form row -->
+    <div class="form-row">
+
+    <!-- social media company -->
+    <div class="form-control">
+        <label for="resume_social-media_company">Company: </label>
+        <input 
+        type="text"
+        name="resume_social-media_company"
+        id="resume-social-media_company"
+        value="{{.Form.Values.Get "resume_social-media_company"}}"
+        >
+        {{ with .Form.Errors.Get "resume_social-media_company" }}
+            {{ range . }}
+                <small class="error">{{ . }}</small>
+            {{ end }}
+        {{ end }}
+        </div>
+        <!--/social media company -->
+
+    <!-- social media username -->
+    <div class="form-control">
+        <label for="resume_social-media_username">username: </label>
+        <input 
+        type="text"
+        name="resume_social-media_username"
+        id="resume-social-media_username"
+        value="{{.Form.Values.Get "resume_social-media_username"}}"
+        >
+        {{ with .Form.Errors.Get "resume_social-media_username" }}
+            {{ range . }}
+                <small class="error">{{ . }}</small>
+            {{ end }}
+        {{ end }}
+        </div>
+        <!--/social media username -->
+    
+    <!-- social media address -->
+    <div class="form-control">
+        <label for="resume_social-media_adderss">Address: </label>
+        <input 
+        type="text"
+        name="resume_social-media_address" 
+        id="resume-social-media_address"
+        value="{{.Form.Values.Get "resume_social-media_address"}}"
+        >
+        {{ with .Form.Errors.Get "resume_social-media_address" }}
+            {{ range . }}
+                <small class="error">{{ . }}</small>
+            {{ end }}
+        {{ end }}
+        </div>
+        <!--/social media address -->
+    </div>
+    <!--/form-row -->
+<button id="socialMediaBtn">Add New Row</button>
+</fieldset>
+
+
+{{ end }}

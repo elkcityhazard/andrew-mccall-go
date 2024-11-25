@@ -1,0 +1,16 @@
+{{ define "resume-job-title"}}
+<fieldset id="jobTitle" class="resume">
+    <legend class="resume">
+        Job Title
+    </legend>
+    <div class="form-control">
+        <label for="resume_job_title">Job Title: </label>
+        <input type="text" name="resume_job_title" id="resume_job_title" value="{{.Form.Values.Get "resume_job_title"}}">
+        {{ with .Form.Errors.Get "resume_job_title" }}
+            {{ range . }}
+            <small class="error">{{ . }}</small>
+            {{ end }}
+        {{ end }}
+    </div>
+</fieldset>
+{{ end }}

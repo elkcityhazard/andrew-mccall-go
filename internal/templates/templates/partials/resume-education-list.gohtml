@@ -1,0 +1,136 @@
+{{ define "resume-education-list" }}
+    <fieldset id="EducationList" class="resume">
+        <legend class="resume">Education List</legend>
+        <!-- form group -->
+         <div class="form-group">
+            <!-- form row -->
+             <div class="form-row">
+                <div class="form-control">  <!-- form control -->
+                    <label for="resume_education-list_name">Name: </label>
+                    <input 
+                    type="text"
+                    name="resume_education-list_name"
+                    id="resume_education-list_name"
+                    value="{{.Form.Values.Get "resume_education-list_name"}}"
+                    >
+                    {{ with .Form.Errors.Get "resume_education-list_name"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                </div>  <!--/form control -->
+                <div class="form-control">  <!-- form control -->
+                    <label for="resume_education-list_degreeyear">Degree Year: </label>
+                    <input 
+                    type="number"
+                    min="1980"
+                    max="2100"
+                    name="resume_education-list_degreeyear"
+                    id="resume_education-list_degreeyear"
+                    value="{{.Form.Values.Get "resume_education-list_degreeyear"}}"
+                    >
+                    {{ with .Form.Errors.Get "resume_education-list_degreeyear"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                </div>  <!--/form control -->
+                <div class="form-control">  <!-- form control -->
+                    <label for="resume_education-list_degree">Degree: </label>
+                    <input 
+                    type="text"
+                    name="resume_education-list_degree"
+                    id="resume_education-list_degree"
+                    value="{{.Form.Values.Get "resume_education-list_degree"}}"
+                    >
+                    {{ with .Form.Errors.Get "resume_education-list_degree"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                </div>  <!--/form control -->
+
+             </div>
+            <!--/form row -->
+            <!-- form row -->
+          <div class="form-row">
+            <div class="form-control">  <!-- form control -->
+                <label for="resume_education-list_address1">Address 1: </label>
+                <input 
+                type="text"
+                name="resume_education-list_address1"
+                id="resume_education-list_address1"
+                value="{{.Form.Values.Get "resume_education-list_address1"}}"
+                >
+                {{ with .Form.Errors.Get "resume_education-list_address1"}}
+                    {{ range . }}
+                        <small class="error">{{.}}</small>
+                    {{ end }}
+                {{ end }}
+            </div>  <!--/form control -->
+            <div class="form-control">  <!-- form control -->
+                <label for="resume_education-list_address2">Address #2: </label>
+                <input 
+                type="text"
+                name="resume_education-list_address2"
+                id="resume_education-list_address2"
+                value="{{.Form.Values.Get "resume_education-list_address2"}}"
+                >
+                {{ with .Form.Errors.Get "resume_education-list_address2"}}
+                    {{ range . }}
+                        <small class="error">{{.}}</small>
+                    {{ end }}
+                {{ end }}
+            </div>  <!--/form control -->
+            <div class="form-control">  <!-- form control -->
+                <label for="resume_education-list_city">City: </label>
+                <input 
+                type="text"
+                name="resume_education-list_city" 
+                id="resume_education-list_city"
+                value="{{.Form.Values.Get "resume_education-list_city"}}"
+                >
+                {{ with .Form.Errors.Get "resume_education-list_city"}}
+                    {{ range . }}
+                        <small class="error">{{.}}</small>
+                    {{ end }}
+                {{ end }}
+            </div>  <!--/form control -->
+          </div>
+         <!--/form row --> 
+         <div class="form-row"> <!-- form row -->
+            <div class="form-control">  <!-- form control -->
+               <label for="resume_education-list_state">State: </label>
+               <input 
+               type="text"
+               name="resume_education-list_state" 
+               id="resume_education-list_state" 
+               value="{{.Form.Values.Get "resume_education-list_state"}}"
+               >
+               {{ with .Form.Errors.Get "resume_education-list_state"}}
+                   {{ range . }}
+                       <small class="error">{{.}}</small>
+                   {{ end }}
+               {{ end }}
+           </div>  <!--/form control -->
+           <div class="form-control">  <!-- form control -->
+               <label for="resume_education-list_zipcode">Zipcode: </label>
+               <input 
+               type="text"
+               name="resume_education-list_zipcode"
+               id="resume_education-list_zipcode"
+               value="{{.Form.Values.Get "resume_education-list_zipcode"}}"
+               >
+               {{ with .Form.Errors.Get "resume_education-list_zipcode"}}
+                   {{ range . }}
+                       <small class="error">{{.}}</small>
+                   {{ end }}
+               {{ end }}
+           </div>  <!--/form control -->
+
+           </div><!--/form row -->
+         </div>
+        <!--/form group --> 
+            <button id="educationListBtn">Add Row</button>
+    </fieldset>
+{{ end }}

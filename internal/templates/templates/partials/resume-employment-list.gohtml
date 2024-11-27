@@ -1,9 +1,11 @@
 {{define "resume-employment-list"}}
 <fieldset id="employmentList" class="resume">
     <legend class="resume">Employment History</legend>
-    <!-- form row -->
-    <div class="form-row">
-        <!-- form control -->
+    <!-- form group -->
+     <div class="form-group">
+        <!-- form row -->
+         <div class="form-row">
+            <!-- form control -->
         <div class="form-control">
             <label for="resume_employment-list_title">Employer Title: </label>
             <input type="text" name="resume_employment-list_title" id="resume_employment-list_title" value="{{.Form.Values.Get "resume_employment-list_title"}}">
@@ -36,7 +38,12 @@
             {{ end }}
         </div>
         <!--/form control-->
-        <!-- form control -->
+         </div>
+         <!-- form row-->
+
+         <!-- form row -->
+          <div class="form-row">
+            <!-- form control -->
         <div class="form-control">
             <label for="resume_employment-list_job_title">Job Title: </label>
             <input type="text" name="resume_employment-list_job_title" id="resume_employment-list_job_title" value="{{.Form.Values.Get "resume_employment-list_job_title"}}">
@@ -58,9 +65,11 @@
             {{ end }}
         </div>
         <!--/form control-->
+          </div>
+          <!--/ form row-->
 
-    
-    </div>
+     </div>
+    <!--/form group -->
     <button id="employmentListBtn">Add Row</button>
     <!--/form row -->
 </fieldset>

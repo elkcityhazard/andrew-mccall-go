@@ -2,7 +2,14 @@ class Resume {
   constructor(formID = "") {
     this.formID = formID || null;
     this.form = document.getElementById(formID) || null;
-    this.btnIds = ["#socialMediaBtn", "#skillListBtn", "#employmentListBtn"];
+    this.btnIds = [
+      "#socialMediaBtn",
+      "#skillListBtn",
+      "#employmentListBtn",
+      "#educationListBtn",
+      "#awardListBtn",
+      "#referenceListBtn",
+    ];
     if (!this.formID || !this.form) return null;
 
     this.events();

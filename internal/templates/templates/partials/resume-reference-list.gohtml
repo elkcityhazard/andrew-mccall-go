@@ -1,0 +1,246 @@
+{{define "resume-reference-list" }}
+<fieldset id="referenceList" class="resume">
+<legend>Reference List</legend>
+<!-- form group -->
+<div class="form-group">
+<!-- form row -->
+<div class="form-row">
+    <!-- form control -->
+     <div class="form-control">
+        <label for="resume_reference-list_firstname">First Name: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_firstname" 
+         id="resume_reference-list_firstname"
+        value="{{.Form.Values.Get "resume_reference-list_firstname"}}"
+         >
+         {{ with .Form.Errors.Get "resume_reference-list_firstname"}}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+     </div>
+    <!--/form control --> 
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_lastname">Last Name: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_lastname" 
+         id="resume_reference-list_lastname"
+        value="{{.Form.Values.Get "resume_reference-list_lastname" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_lastname" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_email">Email: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_email" 
+         id="resume_reference-list_email"
+        value="{{.Form.Values.Get "resume_reference-list_email" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_email" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+</div>
+<!--/form row -->
+
+<!-- form row -->
+<div class="form-row">
+    <!-- form control -->
+     <div class="form-control">
+        <label for="resume_reference-list_phonenumber">Phone Number: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_phonenumber" 
+         id="resume_reference-list_phonenumber"
+        value="{{.Form.Values.Get "resume_reference-list_phonenumber"}}"
+         >
+         {{ with .Form.Errors.Get "resume_reference-list_phonenumber"}}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+     </div>
+    <!--/form control --> 
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_jobtitle">Job Title: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_jobtitle" 
+         id="resume_reference-list_jobtitle"
+        value="{{.Form.Values.Get "resume_reference-list_jobtitle" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_jobtitle" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_organization">Organization: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_organization" 
+         id="resume_reference-list_organization"
+        value="{{.Form.Values.Get "resume_reference-list_organization" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_organization" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+</div>
+<!--/form row -->
+
+<!-- form row -->
+<div class="form-row">
+    <!-- form control -->
+     <div class="form-control">
+        <label for="resume_reference-list_type">Type: </label>
+        <select 
+        name="resume_reference-list_type" 
+        id="resume_reference-list_type"
+        >
+        <option value="personal">Personal</option>
+        <option value="professional">Professional</option>
+        <option value="academic">Academic</option>
+        <option value="industry">Industry</option>
+    </select>
+         {{ with .Form.Errors.Get "resume_reference-list_type"}}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_address1">Address #1: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_address1" 
+         id="resume_reference-list_address1"
+        value="{{.Form.Values.Get "resume_reference-list_address1" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_address1" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_address2">Address #2: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_address2" 
+         id="resume_reference-list_address2"
+        value="{{.Form.Values.Get "resume_reference-list_address2" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_address2" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+</div>
+<!--/form row -->
+
+<!-- form row -->
+<div class="form-row">
+    <!-- form control -->
+     <div class="form-control">
+        <label for="resume_reference-list_city">City: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_city" 
+         id="resume_reference-list_city"
+        value="{{.Form.Values.Get "resume_reference-list_city"}}"
+         >
+         {{ with .Form.Errors.Get "resume_reference-list_city"}}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+     </div>
+    <!--/form control --> 
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_state">State: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_state" 
+         id="resume_reference-list_state"
+        value="{{.Form.Values.Get "resume_reference-list_state" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_state" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+    <!-- form control -->
+    <div class="form-control">
+        <label for="resume_reference-list_zipcode">Zipcode: </label>
+        <input 
+         type="text" 
+         name="resume_reference-list_zipcode" 
+         id="resume_reference-list_zipcode"
+        value="{{.Form.Values.Get "resume_reference-list_zipcode" }}"
+        />
+         {{ with .Form.Errors.Get "resume_reference-list_zipcode" }}
+            {{ range . }}
+            <small class="error">{{.}}</small>
+            {{ end }}
+         {{ end }}
+    </div>
+    <!--/form control -->
+</div>
+<!--/form row -->
+<div class="form-row">
+    <!-- form control -->
+     <div class="form-control">
+        <label for="resume_reference-list_content">Content: </label>
+    <textarea 
+    name="resume_reference-list_content" 
+    id="resume_reference-list_content"
+    >
+    {{ .Form.Values.Get "resume_reference-list_content" }}
+</textarea>
+{{ with .Form.Errors.Get "resume_reference-list_content"}}
+    {{ range . }}
+        <small class="error">{{.}}</small>
+    {{ end }}
+{{ end }}
+
+     </div>
+
+    <!-- form control -->
+    
+</div>
+<!--/form row -->
+</div>
+<!--/form-group -->
+<button id="referenceListBtn">Add Row</button>
+</fieldset>
+{{ end }}

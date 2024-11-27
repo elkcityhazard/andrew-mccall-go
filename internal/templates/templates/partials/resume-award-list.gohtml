@@ -1,0 +1,82 @@
+{{ define "resume-award-list" }}
+    <fieldset id="awardList" class="resume">
+        <legend class="resume">Award List</legend>
+        <!-- form group -->
+       <div class="form-group">
+            <!-- form row -->
+             <div class="form-row">
+                <!-- form control -->
+                 <div class="form-control">
+                    <label for="resume_award-list_title">Title: </label>
+                    <input 
+                        type="text" 
+                        name="resume_award-list_title" 
+                        id="resume_award-list_title"
+                        value="{{.Form.Values.Get "resume_award-list_title"}}"
+                        >
+                    {{ with .Form.Errors.Get "resume_award-list_title"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                 </div>
+                 <!--/form control-->
+                 <!-- form control -->
+                 <div class="form-control">
+                    <label for="resume_award-list_name">Name: </label>
+                    <input 
+                        type="text" 
+                        name="resume_award-list_name" 
+                        id="resume_award-list_name"
+                        value="{{.Form.Values.Get "resume_award-list_name"}}"
+                        >
+                    {{ with .Form.Errors.Get "resume_award-list_name"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                 </div>
+                 <!--/form control-->
+                 <div class="form-control">
+                    <label for="resume_award-list_year">Year: </label>
+                    <input 
+                        type="number"
+                        min="1950"
+                        max="250"
+                        step="1" 
+                        year="resume_award-list_year" 
+                        id="resume_award-list_year"
+                        value="{{.Form.Values.Get "resume_award-list_year"}}"
+                        >
+                    {{ with .Form.Errors.Get "resume_award-list_year"}}
+                        {{ range . }}
+                            <small class="error">{{.}}</small>
+                        {{ end }}
+                    {{ end }}
+                 </div>
+                 <!--/form control-->
+             </div>
+            <!--/form row -->
+            <!-- form row -->
+                <div class="form-row">
+                    <div class="form-control">
+                        <label for="resume_award-list_content">Content: </label>
+                        <textarea 
+                            name="resume_award-list_content" 
+                            id="resume_award-list_content"
+                            >
+                            {{.Form.Values.Get "resume_award-list_content"}}
+                        </textarea>
+                        {{ with .Form.Errors.Get "resume_award-list_content"}}
+                            {{ range . }}
+                                <small class="error">{{.}}</small>
+                            {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+            <!--/form row-->
+       </div>
+       <button id="awardListBtn">Add Row</button>
+       <!--/form group--> 
+    </fieldset>
+{{ end }}

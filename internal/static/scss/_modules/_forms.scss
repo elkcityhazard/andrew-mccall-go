@@ -31,13 +31,24 @@
     padding-right: 1rem;
   }
 
+  .form-group {
+    border-bottom: 1px solid #6e6a86;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-block-end: 1rem;
+    margin-bottom: 1rem;
+    padding-block: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .form-row {
     display: flex;
     gap: 1rem;
   }
 
   .form-control {
-    flex: 1 1 auto;
+    flex: 1 1 calc(33% - 2rem);
     display: flex;
     flex-flow: column nowrap;
     margin-block-end: calc(6 / 16 * 1rem);
@@ -50,6 +61,7 @@
   }
 
   input,
+  select,
   textarea{
     border: 1px solid #21202e;
     background: #21202e;

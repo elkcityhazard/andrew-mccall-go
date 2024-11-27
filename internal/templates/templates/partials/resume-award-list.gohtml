@@ -13,6 +13,7 @@
                         name="resume_award-list_title" 
                         id="resume_award-list_title"
                         value="{{.Form.Values.Get "resume_award-list_title"}}"
+                        pattern="[a-zA-Z0-9\. ]+"
                         >
                     {{ with .Form.Errors.Get "resume_award-list_title"}}
                         {{ range . }}

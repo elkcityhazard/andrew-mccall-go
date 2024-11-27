@@ -1,6 +1,7 @@
 Makefile
 docker-compose.yml
 .env
+.*
 **/environment
 dockerfile
 src/*

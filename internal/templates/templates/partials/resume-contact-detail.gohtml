@@ -13,9 +13,7 @@
                 value="{{.Form.Values.Get "resume_contact-details_firstname" }}"
                 >
                 {{ with .Form.Errors.Get "resume_contact-details_firstname"}}
-                    {{ range . }}
                     <small class="error">{{.}}</small>
-                    {{ end }}
                 {{ end  }}
         </div>
         <!--/first name -->
@@ -30,9 +28,7 @@
             value="{{.Form.Values.Get "resume_contact-details_lastname"}}"
             >
             {{with .Form.Errors.Get "resume_contact-details_lastname"}}
-                {{range . }}
                 <small class="error">{{.}}</small>
-                {{ end }}
             {{end}}
             </div>
         <!--/last name -->
@@ -51,9 +47,7 @@
             value="{{.Form.Values.Get "resume_contact-details_address1" }}"
             >
             {{ with .Form.Errors.Get "resume_contact-details_address1"}}
-                {{ range . }}
                 <small class="error">{{.}}</small>
-                {{ end }}
             {{ end }}
             </div>
         <!--/address line 1 -->
@@ -67,9 +61,7 @@
             value="{{.Form.Values.Get "resume_contact-details_address2" }}"
             >
             {{ with .Form.Errors.Get "resume_contact-details_address2"}}
-                {{ range . }}
                 <small class="error">{{.}}</small>
-                {{ end }}
             {{ end }}
             </div>
         <!--/address line 2 -->
@@ -88,6 +80,9 @@
                 id="resume_contact-details_city"
                 value="{{.Form.Values.Get "resume_contact-details_city" }}"
                 >
+                {{ with .Form.Errors.Get "resume_contact-details_city"}}
+                    <small class="error">{{. }}</small>
+                {{ end }}
                 </div>
             <!--/city -->
 
@@ -101,9 +96,7 @@
                 value="{{.Form.Values.Get "resume_contact-details_state"}}"
                 >
                 {{ with .Form.Errors.Get "resume_contact-details_state" }}
-                    {{ range . }}
                     <small class="error">{{.}}</small>
-                    {{ end }}
                 {{ end }}
                 </div>
                 <!--/state -->
@@ -117,9 +110,7 @@
                 value="{{.Form.Values.Get "resume_contact-details_zipcode" }}"
                 >
                 {{ with .Form.Errors.Get "resume_contact-details_zipcode" }}
-                    {{ range . }}
                     <small class="error">{{.}}</small>
-                    {{ end }}
 
                 {{ end }}
                 </div>
@@ -138,9 +129,7 @@
             value="{{.Form.Values.Get "resume_contact-details_email" }}"
             >
             {{ with .Form.Errors.Get "resume_contact-details_email" }}
-                {{ range . }}
                 <small class="error">{{.}}</small>
-                {{ end }}
             {{ end }}
             </div>
         <!--/email -->
@@ -155,14 +144,25 @@
             value="{{.Form.Values.Get "resume_contact-details_phone" }}"
             >
             {{ with .Form.Errors.Get "resume_contact-details_phone" }}
-                {{ range . }}
                     <small class="error">{{.}}</small>
-                {{ end }}
             {{ end }}
             </div>
         <!--/phone -->
         </div>
-
         <!--/form row -->
+        <div class="form-row">
+            <div class="form-control">
+            <label for="resume_contact-details_webaddress">Web Address: </label>
+            <input 
+            type="text"
+            name="resume_contact-details_webaddress"
+            id="resume_contact-details_webaddress"
+            value="{{.Form.Values.Get "resume_contact-details_webaddress"}}"
+            >
+            {{ with .Form.Errors.Get "resume_contact-details_webaddress" }}
+                <small class="error">{{.}}</small>
+            {{ end }}
+            </div>
+        </div>
 </fieldset>
 {{ end }}

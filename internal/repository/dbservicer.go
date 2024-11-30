@@ -29,4 +29,7 @@ type DBServicer interface {
 	InsertCategoryPostJoin(*models.CategoryPostJoin) (int64, error)
 	ListCategories() ([]*models.Category, error)
 	GetCategoryByPostID(postID int64) (*models.Category, error)
+
+	//	Resume
+	InsertResume(rme *models.Resume) (int64, error)
 }

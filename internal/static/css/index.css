@@ -237,6 +237,18 @@
   textarea:user-invalid {
     outline: 2px solid red;
   }
+  input:user-valid,
+  select:user-valid,
+  textarea:user-valid {
+    outline: 2px solid green;
+  }
+  .error {
+    color: #eb6f92;
+    font-weidght: 600;
+    padding-block: 0.33rem;
+    padding-top: 0.33rem;
+    padding-bottom: 0.33rem;
+  }
 }
 @layer partials {
   .article-card {

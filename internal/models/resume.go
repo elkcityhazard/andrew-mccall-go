@@ -2,23 +2,25 @@ package models
 
 import "time"
 
+// Resume holds all resume elements together
 type Resume struct {
-	ID       int64
-	UserID   int64
-	JobTitle string
-	ContactDetail
-	SocialMediaList
-	Objective
-	SkillList
-	EmploymentList
-	EducationList
-	AwardsList
-	ReferenceList
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	Version   int
+	ID              int64
+	UserID          int64
+	JobTitle        string           // parsed
+	ContactDetail   *ContactDetail   // parsed
+	SocialMediaList *SocialMediaList // parsed
+	Objective       *Objective       // parsed
+	SkillList       *SkillList       // parsed
+	EmploymentList  *EmploymentList  // parsed
+	EducationList   *EducationList   // parsed
+	AwardsList      *AwardsList
+	ReferenceList   *ReferenceList
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	Version         int
 }
 
+// NewResume returns a resume  model with created_at. updated_at, and version pre-populated
 func NewResume() *Resume {
 	return &Resume{
 		CreatedAt: time.Now(),
@@ -59,7 +61,7 @@ func NewReferenceItem() *ReferenceItem {
 type ReferenceList struct {
 	ID            int64
 	ResumeID      int64
-	ReferenceList []ReferenceItem
+	ReferenceList []*ReferenceItem
 	CreatedAt     time.Time
 	UpdatedAt     time.Time
 	Version       int
@@ -78,7 +80,7 @@ type AwardItem struct {
 	AwardListID      int64
 	Title            string
 	OrganizationName string
-	Year             time.Time
+	Year             int
 	Content          string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
@@ -96,7 +98,7 @@ func NewAwardItem() *AwardItem {
 type AwardsList struct {
 	ID        int64
 	ResumeID  int64
-	Awards    []AwardItem
+	Awards    []*AwardItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -113,7 +115,7 @@ func NewAwardsList() *AwardsList {
 type EducationList struct {
 	ID        int64
 	ResumeID  int64
-	Education []EducationItem
+	Education []*EducationItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -131,7 +133,7 @@ type EducationItem struct {
 	ID              int64
 	EducationListID int64
 	Name            string
-	DegreeYear      time.Time
+	DegreeYear      int
 	Degree          string
 	Address1        string
 	Address2        string
@@ -155,8 +157,8 @@ type EmploymentListItem struct {
 	ID               int64
 	EmploymentListID int64
 	Title            string
-	From             time.Time
-	To               time.Time
+	From             int
+	To               int
 	JobTitle         string
 	Summary          string
 	CreatedAt        time.Time
@@ -175,7 +177,7 @@ func NewEmploymentListItem() *EmploymentListItem {
 type EmploymentList struct {
 	ID        int64
 	ResumeID  int64
-	Employers []EmploymentListItem
+	Employers []*EmploymentListItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -193,7 +195,7 @@ type SkillList struct {
 	ID        int64
 	ResumeID  int64
 	Title     string
-	Items     []SkillListItem
+	Items     []*SkillListItem
 	CreatedAt time.Time
 	UpdatedAt time.Time
 	Version   int
@@ -212,7 +214,7 @@ type SkillListItem struct {
 	SKillListID int64
 	Title       string
 	Content     string
-	Duration    time.Time
+	Duration    int
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	Version     int
@@ -246,7 +248,7 @@ func NewObjective() *Objective {
 type SocialMediaList struct {
 	ID                   int64
 	ResumeID             int64
-	SocialMediaListItems []SocialMediaListItems
+	SocialMediaListItems []*SocialMediaListItems
 	CreatedAt            time.Time
 	UpdatedAt            time.Time
 	Version              int

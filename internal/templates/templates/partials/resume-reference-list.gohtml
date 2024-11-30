@@ -15,9 +15,7 @@
         value="{{.Form.Values.Get "resume_reference-list_firstname"}}"
          >
          {{ with .Form.Errors.Get "resume_reference-list_firstname"}}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
      </div>
     <!--/form control --> 
@@ -31,9 +29,7 @@
         value="{{.Form.Values.Get "resume_reference-list_lastname" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_lastname" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -47,9 +43,7 @@
         value="{{.Form.Values.Get "resume_reference-list_email" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_email" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -68,9 +62,7 @@
         value="{{.Form.Values.Get "resume_reference-list_phonenumber"}}"
          >
          {{ with .Form.Errors.Get "resume_reference-list_phonenumber"}}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
      </div>
     <!--/form control --> 
@@ -84,9 +76,7 @@
         value="{{.Form.Values.Get "resume_reference-list_jobtitle" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_jobtitle" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -100,9 +90,7 @@
         value="{{.Form.Values.Get "resume_reference-list_organization" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_organization" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -124,9 +112,7 @@
         <option value="industry">Industry</option>
     </select>
          {{ with .Form.Errors.Get "resume_reference-list_type"}}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -140,9 +126,7 @@
         value="{{.Form.Values.Get "resume_reference-list_address1" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_address1" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -156,9 +140,7 @@
         value="{{.Form.Values.Get "resume_reference-list_address2" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_address2" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -177,9 +159,7 @@
         value="{{.Form.Values.Get "resume_reference-list_city"}}"
          >
          {{ with .Form.Errors.Get "resume_reference-list_city"}}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
      </div>
     <!--/form control --> 
@@ -193,9 +173,7 @@
         value="{{.Form.Values.Get "resume_reference-list_state" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_state" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -209,9 +187,7 @@
         value="{{.Form.Values.Get "resume_reference-list_zipcode" }}"
         />
          {{ with .Form.Errors.Get "resume_reference-list_zipcode" }}
-            {{ range . }}
             <small class="error">{{.}}</small>
-            {{ end }}
          {{ end }}
     </div>
     <!--/form control -->
@@ -228,9 +204,7 @@
     {{ .Form.Values.Get "resume_reference-list_content" }}
 </textarea>
 {{ with .Form.Errors.Get "resume_reference-list_content"}}
-    {{ range . }}
         <small class="error">{{.}}</small>
-    {{ end }}
 {{ end }}
 
      </div>

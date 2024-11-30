@@ -120,6 +120,7 @@ func routes() http.Handler {
 
 	// resume crud
 	rtr.New("GET", "/admin/resume", handlers.Repo.HandleGetAdminResume, requiresAuth)
+	rtr.New("POST", "/admin/resume", handlers.Repo.HandlePostAdminResume, requiresAuth)
 
 	// Admin Manage Categories
 	rtr.New("GET", "/admin/categories", handlers.Repo.HandleGetAdminCategories, requiresAuth)

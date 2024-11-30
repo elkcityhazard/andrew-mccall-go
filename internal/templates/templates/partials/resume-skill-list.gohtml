@@ -4,16 +4,14 @@
 <div class="form-row">
     <div class="form-control">
     <label for="resume_skill-list_title">Title: </label>
-    <input 
+    <input  
         type="text" 
         name="resume_skill-list_title"
         id="resume_skill-list_title"
         value="{{.Form.Values.Get "resume_skill-list_title"}}"
     >
     {{ with .Form.Errors.Get "resume_skill-list_title"}}
-        {{ range . }}
         <small class="error">{{.}}</small>
-        {{ end }}
     {{ end }}
 </div>
 <div class="form-control">
@@ -21,22 +19,18 @@
 <input type="text"
     id="resume_skill-list_content"
     name="resume_skill-list_content"
-    value="{{.Form.Values.Get "resume_skill-list_title" }}"
+    value="{{.Form.Values.Get "resume_skill-list_content" }}"
 />
     {{ with .Form.Errors.Get "resume_skill-list_content"}}
-        {{ range . }}
         <small class="error">{{.}}</small>
-        {{ end }}
     {{ end }}
 </div>
 <div class="form-control">
 <label for="resume_skill-list_duration">Duration: </label>
-<input type="number" min="1" max="99" step="1">
+<input type="number" min="1" max="99" step="1" value={{.Form.Values.Get "resume_skill-list_duration"}}>
 
     {{ with .Form.Errors.Get "resume_skill-list_duration"}}
-        {{ range . }}
         <small class="error">{{.}}</small>
-        {{ end }}
     {{ end }}
 </div>
 </div>

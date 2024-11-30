@@ -14,9 +14,7 @@
         value="{{.Form.Values.Get "resume_social-media_company"}}"
         >
         {{ with .Form.Errors.Get "resume_social-media_company" }}
-            {{ range . }}
                 <small class="error">{{ . }}</small>
-            {{ end }}
         {{ end }}
         </div>
         <!--/social media company -->
@@ -31,9 +29,7 @@
         value="{{.Form.Values.Get "resume_social-media_username"}}"
         >
         {{ with .Form.Errors.Get "resume_social-media_username" }}
-            {{ range . }}
                 <small class="error">{{ . }}</small>
-            {{ end }}
         {{ end }}
         </div>
         <!--/social media username -->
@@ -48,9 +44,7 @@
         value="{{.Form.Values.Get "resume_social-media_address"}}"
         >
         {{ with .Form.Errors.Get "resume_social-media_address" }}
-            {{ range . }}
                 <small class="error">{{ . }}</small>
-            {{ end }}
         {{ end }}
         </div>
         <!--/social media address -->

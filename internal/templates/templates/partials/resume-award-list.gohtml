@@ -16,9 +16,7 @@
                         pattern="[a-zA-Z0-9\. ]+"
                         >
                     {{ with .Form.Errors.Get "resume_award-list_title"}}
-                        {{ range . }}
                             <small class="error">{{.}}</small>
-                        {{ end }}
                     {{ end }}
                  </div>
                  <!--/form control-->
@@ -32,9 +30,7 @@
                         value="{{.Form.Values.Get "resume_award-list_name"}}"
                         >
                     {{ with .Form.Errors.Get "resume_award-list_name"}}
-                        {{ range . }}
                             <small class="error">{{.}}</small>
-                        {{ end }}
                     {{ end }}
                  </div>
                  <!--/form control-->
@@ -50,15 +46,14 @@
                         value="{{.Form.Values.Get "resume_award-list_year"}}"
                         >
                     {{ with .Form.Errors.Get "resume_award-list_year"}}
-                        {{ range . }}
                             <small class="error">{{.}}</small>
-                        {{ end }}
                     {{ end }}
                  </div>
                  <!--/form control-->
              </div>
             <!--/form row -->
-            <!-- form row -->
+ {
+           <!-- form row -->
                 <div class="form-row">
                     <div class="form-control">
                         <label for="resume_award-list_content">Content: </label>
@@ -69,9 +64,7 @@
                             {{.Form.Values.Get "resume_award-list_content"}}
                         </textarea>
                         {{ with .Form.Errors.Get "resume_award-list_content"}}
-                            {{ range . }}
                                 <small class="error">{{.}}</small>
-                            {{ end }}
                         {{ end }}
                     </div>
                 </div>

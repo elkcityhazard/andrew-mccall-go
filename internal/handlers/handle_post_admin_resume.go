@@ -54,6 +54,7 @@ func (hr *HandlerRepo) HandlePostAdminResume(w http.ResponseWriter, r *http.Requ
 
 	// New resume
 	var res = models.NewResume()
+	res.UserID = hr.app.SessionManager.GetInt64(r.Context(), "id")
 	res.JobTitle = html.EscapeString(resumeForm.Get("resume_job_title"))
 
 	// contact details
@@ -76,6 +77,15 @@ func (hr *HandlerRepo) HandlePostAdminResume(w http.ResponseWriter, r *http.Requ
 	res.EducationList = parseEducationList(resumeForm)
 
 	res.ReferenceList = parseReferenceList(resumeForm)
+
+	resumeID, err := hr.conn.InsertResume(res)
+
+	if err != nil {
+		returnErr(w, err)
+		return
+	}
+
+	res.ID = resumeID
 
 	w.Header().Set("Content-Type", "application/json")
 

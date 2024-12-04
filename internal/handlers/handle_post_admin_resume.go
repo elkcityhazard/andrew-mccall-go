@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/forms"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/models"
@@ -98,6 +99,7 @@ func escapeHTML(s string) string {
 	if len(s) < 1 {
 		return ""
 	}
+	s = strings.TrimSpace(s)
 	return html.EscapeString(s)
 }
 

@@ -10,7 +10,7 @@ import (
 )
 
 func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
-	ctx, cancel := context.WithTimeout(sdc.app.Context, time.Second*15)
+	ctx, cancel := context.WithTimeout(sdc.app.Context, time.Second*30)
 
 	defer cancel()
 
@@ -134,7 +134,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			cd.WebAddress,
 		}
 
-		_, err = tx.ExecContext(ctx, stmt, contactDetailsArgs...)
+		result, err = tx.ExecContext(ctx, stmt, contactDetailsArgs...)
 
 		if err != nil {
 			errorChan <- err
@@ -144,6 +144,18 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			}
 			return
 		}
+
+		contactDetailID, err := result.LastInsertId()
+		if err != nil {
+			errorChan <- err
+			err = tx.Rollback()
+			if err != nil {
+				errorChan <- err
+			}
+			return
+		}
+
+		rme.ContactDetail.ID = contactDetailID
 
 		//	skill list group
 
@@ -181,9 +193,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		// Skill List Items
 
 		for i := range rme.SkillList.Items {
-			item := rme.SkillList.Items[i]
-
-			item.SKillListID = skillListGroupID
+			rme.SkillList.Items[i].SKillListID = skillListGroupID
 		}
 
 		stmt = `
@@ -223,6 +233,20 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			return
 		}
 
+		lastSkillListItemID, err := result.LastInsertId()
+		if err != nil {
+			errorChan <- err
+			err = tx.Rollback()
+			if err != nil {
+				errorChan <- err
+			}
+			return
+		}
+
+		for i := range rme.SkillList.Items {
+			rme.SkillList.Items[i].ID = lastSkillListItemID
+		}
+
 		// Employment History Group
 
 		stmt = `
@@ -236,7 +260,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 
 		args = []any{resumeID}
 
-		result, err = sdc.conn.ExecContext(ctx, stmt, args...)
+		result, err = tx.ExecContext(ctx, stmt, args...)
 
 		if err != nil {
 			errorChan <- err
@@ -281,6 +305,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		args = []any{}
 
 		for i := range rme.EmploymentList.Employers {
+			rme.EmploymentList.Employers[i].EmploymentListID = employmentListID
 			var item = rme.EmploymentList.Employers[i]
 			args = append(args, item.EmploymentListID, item.Title, item.From, item.To, item.JobTitle, item.Summary)
 		}
@@ -330,8 +355,8 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 
 		rme.SocialMediaList.ID = socialMediaListID
 
-		for _, v := range rme.SocialMediaList.SocialMediaListItems {
-			v.SocialMediaListID = socialMediaListID
+		for i := range rme.SocialMediaList.SocialMediaListItems {
+			rme.SocialMediaList.SocialMediaListItems[i].SocialMediaListID = socialMediaListID
 		}
 
 		// Social Media Items
@@ -369,6 +394,20 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			return
 		}
 
+		lastSMItemID, err := result.LastInsertId()
+		if err != nil {
+			errorChan <- err
+			err = tx.Rollback()
+			if err != nil {
+				errorChan <- err
+			}
+			return
+		}
+
+		for i := range rme.SocialMediaList.SocialMediaListItems {
+			rme.SocialMediaList.SocialMediaListItems[i].ID = lastSMItemID
+		}
+
 		// Education List Group
 
 		stmt = `
@@ -404,9 +443,8 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			return
 		}
 
-		for i := range rme.EducationList.Education {
-			rme.EducationList.Education[i].EducationListID = educationListID
-		}
+		rme.EducationList.ID = educationListID
+
 		// Education List Items
 
 		stmt = `
@@ -431,6 +469,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		args = []any{}
 
 		for i := range rme.EducationList.Education {
+			rme.EducationList.Education[i].EducationListID = educationListID
 			item := rme.EducationList.Education[i]
 			args = append(args, item.EducationListID, item.Name, item.DegreeYear, item.Degree, item.Address1, item.Address2, item.City, item.State, item.Zipcode)
 		}
@@ -477,10 +516,6 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			return
 		}
 
-		for i := range rme.AwardsList.Awards {
-			rme.AwardsList.Awards[i].AwardListID = awardListID
-		}
-
 		// Award List Items
 
 		stmt = `
@@ -501,6 +536,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		args = []any{}
 
 		for i := range rme.AwardsList.Awards {
+			rme.AwardsList.Awards[i].AwardListID = awardListID
 			item := rme.AwardsList.Awards[i]
 
 			args = append(args, item.AwardListID, item.Title, item.OrganizationName, item.Year, item.Content)
@@ -546,9 +582,10 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			return
 		}
 
+		rme.ReferenceList.ID = referenceListID
+
 		for i := range rme.ReferenceList.ReferenceList {
-			item := rme.ReferenceList.ReferenceList[i]
-			item.ReferenceListID = referenceListID
+			rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
 		}
 
 		// Reference List Items
@@ -580,7 +617,7 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 
 		for i := range rme.ReferenceList.ReferenceList {
 			item := rme.ReferenceList.ReferenceList[i]
-
+			rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
 			args = append(args,
 				item.ReferenceListID,
 				item.FirstName,

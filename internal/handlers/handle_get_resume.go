@@ -1,8 +1,10 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
+
+	"github.com/elkcityhazard/andrew-mccall-go/internal/models"
+	"github.com/elkcityhazard/andrew-mccall-go/internal/render"
 )
 
 func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
@@ -90,13 +92,17 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 
 	resume.ReferenceList = refList
 
-	w.Header().Set("Content-Type", "application/json")
+	data := make(map[string]any)
+	stringMap := make(map[string]string)
 
-	err = json.NewEncoder(w).Encode(resume)
+	data["Resume"] = resume
 
-	if err != nil {
-		returnErr(w, err)
-		return
-	}
+	stringMap["PageTitle"] = "Resume"
+
+	render.RenderTemplate(w, r, "resume.gohtml", &models.TemplateData{
+		StringMap: stringMap,
+		Data:      data,
+		Form:      nil,
+	})
 
 }

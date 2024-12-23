@@ -23,6 +23,13 @@ func AddDefaultTemplateData(td *models.TemplateData, r *http.Request) *models.Te
 		td = &models.TemplateData{}
 	}
 
+	if td.StringMap == nil {
+		td.StringMap = make(map[string]string)
+	}
+	if td.StringMap["PageTitle"] == "" {
+		td.StringMap["PageTitle"] = app.SiteTitle
+	}
+
 	td.SiteTitle = app.SiteTitle
 	td.IsAuthenticated = app.SessionManager.Exists(r.Context(), "id")
 	td.CSRFToken = nosurf.Token(r)

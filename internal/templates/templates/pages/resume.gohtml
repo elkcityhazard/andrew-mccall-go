@@ -1,0 +1,29 @@
+{{template "base" . }}
+
+{{ define "post-header" }}
+    <h1>Resume</h1>
+{{ end }}
+
+{{ define "Content" }}
+    {{ with .Data.Resume }}
+        <h2>{{ with .ContactDetail }}{{ .Firstname }} {{ .Lastname }}{{ end }}{{with .JobTitle}} | {{ . }}{{end}}</h2>
+        <section class="resume__contact-detail">
+            <h3>Contact Details</h3>
+            {{ with .ContactDetail }}
+            <address class="resume__contact-detail__address">
+            <ul class="resume__contact-detail__list-group">
+            <li class="resume__contact-detail__list-item">{{.Firstname}} {{.Lastname}}</li>
+            <li class="resume__contact-detail__list-item">{{.AddressLine1}} {{.AddressLine2}}</li>
+            <li class="resume__contact-detail__list-item">{{.City}}, {{.State}} {{.Zipcode}}</li>
+            <li class="resume__contact-detail__list-item">{{.Email}} - {{.PhoneNumber}} - {{.WebAddress}}</li>
+
+            </ul>
+
+            </address>
+            {{ end }}
+        </section>
+
+    {{ end }}
+{{ end }}
+
+

@@ -127,6 +127,7 @@ func routes() http.Handler {
 
 	rtr.New("GET", "/blog", handlers.Repo.HandleGetBlog)
 	rtr.New("GET", `/blog/([\w-\/]+)`, handlers.Repo.HandleGetPost)
+	rtr.New("GET", `/resume`, handlers.Repo.HandleGetResume)
 
 	// handle activation
 	rtr.New("GET", "/users/activation", handlers.Repo.HandleGetUserActivation)

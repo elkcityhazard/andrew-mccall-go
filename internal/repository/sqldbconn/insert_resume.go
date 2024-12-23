@@ -159,44 +159,46 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 
 		//	skill list group
 
-		stmt = `
+		if len(rme.SkillList.Items) > 0 {
+
+			stmt = `
 		insert into
 		skill_lists
 		(resume_id)
 		values(?)
 		`
 
-		args = []any{resumeID}
+			args = []any{resumeID}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		skillListGroupID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			skillListGroupID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		rme.SkillList.ID = skillListGroupID
+			rme.SkillList.ID = skillListGroupID
 
-		// Skill List Items
+			// Skill List Items
 
-		for i := range rme.SkillList.Items {
-			rme.SkillList.Items[i].SKillListID = skillListGroupID
-		}
+			for i := range rme.SkillList.Items {
+				rme.SkillList.Items[i].SKillListID = skillListGroupID
+			}
 
-		stmt = `
+			stmt = `
 		insert into
 		skill_list_items
 		(
@@ -208,48 +210,51 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		values
 		`
 
-		// build multi row insert
+			// build multi row insert
 
-		skillListItemRows := buildMultiRowInsert(len(rme.SkillList.Items), 4)
+			skillListItemRows := buildMultiRowInsert(len(rme.SkillList.Items), 4)
 
-		stmt += skillListItemRows
+			stmt += skillListItemRows
 
-		// build args
+			// build args
 
-		args = []any{}
+			args = []any{}
 
-		for i := range rme.SkillList.Items {
-			var item = rme.SkillList.Items[i]
-			args = append(args, skillListGroupID, item.Title, item.Content, item.Duration)
-		}
+			for i := range rme.SkillList.Items {
+				var item = rme.SkillList.Items[i]
+				args = append(args, skillListGroupID, item.Title, item.Content, item.Duration)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		lastSkillListItemID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			lastSkillListItemID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		for i := range rme.SkillList.Items {
-			rme.SkillList.Items[i].ID = lastSkillListItemID
+			for i := range rme.SkillList.Items {
+				rme.SkillList.Items[i].ID = lastSkillListItemID
+			}
 		}
 
 		// Employment History Group
 
-		stmt = `
+		if len(rme.EmploymentList.Employers) > 0 {
+
+			stmt = `
 		insert into
 		employment_lists
 		(
@@ -258,35 +263,35 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 		values (?)
 		`
 
-		args = []any{resumeID}
+			args = []any{resumeID}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
+			result, err = tx.ExecContext(ctx, stmt, args...)
 
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		employmentListID, err := result.LastInsertId()
+			employmentListID, err := result.LastInsertId()
 
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		rme.EmploymentList.ID = employmentListID
+			rme.EmploymentList.ID = employmentListID
 
-		// Employment History Items
+			// Employment History Items
 
-		stmt = `
+			stmt = `
 		insert into
 			employment_list_items
 			(
@@ -300,68 +305,71 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			values
 		`
 
-		stmt += buildMultiRowInsert(len(rme.EmploymentList.Employers), 6)
+			stmt += buildMultiRowInsert(len(rme.EmploymentList.Employers), 6)
 
-		args = []any{}
+			args = []any{}
 
-		for i := range rme.EmploymentList.Employers {
-			rme.EmploymentList.Employers[i].EmploymentListID = employmentListID
-			var item = rme.EmploymentList.Employers[i]
-			args = append(args, item.EmploymentListID, item.Title, item.From, item.To, item.JobTitle, item.Summary)
-		}
+			for i := range rme.EmploymentList.Employers {
+				rme.EmploymentList.Employers[i].EmploymentListID = employmentListID
+				var item = rme.EmploymentList.Employers[i]
+				args = append(args, item.EmploymentListID, item.Title, item.From, item.To, item.JobTitle, item.Summary)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
+			result, err = tx.ExecContext(ctx, stmt, args...)
 
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
 		}
 
 		// Social Media Group
 
-		stmt = `
+		if len(rme.SocialMediaList.SocialMediaListItems) > 0 {
+
+			stmt = `
 		insert into
 			social_media_lists
 			(resume_id)
 			values (?)
 		`
 
-		args = []any{resumeID}
+			args = []any{resumeID}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
+			result, err = tx.ExecContext(ctx, stmt, args...)
 
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		socialMediaListID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			socialMediaListID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		rme.SocialMediaList.ID = socialMediaListID
+			rme.SocialMediaList.ID = socialMediaListID
 
-		for i := range rme.SocialMediaList.SocialMediaListItems {
-			rme.SocialMediaList.SocialMediaListItems[i].SocialMediaListID = socialMediaListID
-		}
+			for i := range rme.SocialMediaList.SocialMediaListItems {
+				rme.SocialMediaList.SocialMediaListItems[i].SocialMediaListID = socialMediaListID
+			}
 
-		// Social Media Items
+			// Social Media Items
 
-		stmt = `
+			stmt = `
 		insert into
 			social_media_list_items
 			(
@@ -373,44 +381,47 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			values
 		`
 
-		smItems := rme.SocialMediaList.SocialMediaListItems
+			smItems := rme.SocialMediaList.SocialMediaListItems
 
-		stmt += buildMultiRowInsert(len(smItems), 4)
+			stmt += buildMultiRowInsert(len(smItems), 4)
 
-		args = []any{}
+			args = []any{}
 
-		for i := 0; i < len(rme.SocialMediaList.SocialMediaListItems); i++ {
-			var item = rme.SocialMediaList.SocialMediaListItems[i]
-			args = append(args, item.SocialMediaListID, item.CompanyName, item.UserName, item.WebAddress)
-		}
+			for i := 0; i < len(rme.SocialMediaList.SocialMediaListItems); i++ {
+				var item = rme.SocialMediaList.SocialMediaListItems[i]
+				args = append(args, item.SocialMediaListID, item.CompanyName, item.UserName, item.WebAddress)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		lastSMItemID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			lastSMItemID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		for i := range rme.SocialMediaList.SocialMediaListItems {
-			rme.SocialMediaList.SocialMediaListItems[i].ID = lastSMItemID
+			for i := range rme.SocialMediaList.SocialMediaListItems {
+				rme.SocialMediaList.SocialMediaListItems[i].ID = lastSMItemID
+			}
 		}
 
 		// Education List Group
 
-		stmt = `
+		if len(rme.EducationList.Education) > 0 {
+
+			stmt = `
 		insert into
 			education_lists
 			(
@@ -419,35 +430,35 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			values (?)
 		`
 
-		args = []any{}
+			args = []any{}
 
-		args = append(args, resumeID)
+			args = append(args, resumeID)
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		educationListID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			educationListID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		rme.EducationList.ID = educationListID
+			rme.EducationList.ID = educationListID
 
-		// Education List Items
+			// Education List Items
 
-		stmt = `
+			stmt = `
 		insert into
 			education_items
 			(
@@ -464,61 +475,64 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			values 
 		`
 
-		stmt += buildMultiRowInsert(len(rme.EducationList.Education), 9)
+			stmt += buildMultiRowInsert(len(rme.EducationList.Education), 9)
 
-		args = []any{}
+			args = []any{}
 
-		for i := range rme.EducationList.Education {
-			rme.EducationList.Education[i].EducationListID = educationListID
-			item := rme.EducationList.Education[i]
-			args = append(args, item.EducationListID, item.Name, item.DegreeYear, item.Degree, item.Address1, item.Address2, item.City, item.State, item.Zipcode)
-		}
+			for i := range rme.EducationList.Education {
+				rme.EducationList.Education[i].EducationListID = educationListID
+				item := rme.EducationList.Education[i]
+				args = append(args, item.EducationListID, item.Name, item.DegreeYear, item.Degree, item.Address1, item.Address2, item.City, item.State, item.Zipcode)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
 		}
 
 		// Award List Group
 
-		stmt = `
+		if len(rme.AwardsList.Awards) > 0 {
+
+			stmt = `
 		insert into
 			award_lists
 			(resume_id)
 			values (?)
 		`
 
-		args = []any{}
-		args = append(args, resumeID)
+			args = []any{}
+			args = append(args, resumeID)
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		awardListID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			awardListID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		// Award List Items
+			// Award List Items
 
-		stmt = `
+			stmt = `
 		insert into
 			award_items
 			(
@@ -531,66 +545,67 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			values 
 		`
 
-		stmt += buildMultiRowInsert(len(rme.AwardsList.Awards), 5)
+			stmt += buildMultiRowInsert(len(rme.AwardsList.Awards), 5)
 
-		args = []any{}
+			args = []any{}
 
-		for i := range rme.AwardsList.Awards {
-			rme.AwardsList.Awards[i].AwardListID = awardListID
-			item := rme.AwardsList.Awards[i]
+			for i := range rme.AwardsList.Awards {
+				rme.AwardsList.Awards[i].AwardListID = awardListID
+				item := rme.AwardsList.Awards[i]
 
-			args = append(args, item.AwardListID, item.Title, item.OrganizationName, item.Year, item.Content)
-		}
+				args = append(args, item.AwardListID, item.Title, item.OrganizationName, item.Year, item.Content)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
 		}
 
 		// Reference List Group
-
-		stmt = `
+		if len(rme.ReferenceList.ReferenceList) > 0 {
+			stmt = `
 		insert into
 			reference_lists
 			(resume_id)
 			values (?)
 		`
-		args = []any{resumeID}
+			args = []any{resumeID}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		referenceListID, err := result.LastInsertId()
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			referenceListID, err := result.LastInsertId()
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
-		}
 
-		rme.ReferenceList.ID = referenceListID
+			rme.ReferenceList.ID = referenceListID
 
-		for i := range rme.ReferenceList.ReferenceList {
-			rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
-		}
+			for i := range rme.ReferenceList.ReferenceList {
+				rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
+			}
 
-		// Reference List Items
+			// Reference List Items
 
-		stmt = `
+			stmt = `
 		insert into
 			reference_items
 			(
@@ -611,38 +626,39 @@ func (sdc *SQLDbConn) InsertResume(rme *models.Resume) (int64, error) {
 			)
 			values  
 		`
-		stmt += buildMultiRowInsert(len(rme.ReferenceList.ReferenceList), 14)
+			stmt += buildMultiRowInsert(len(rme.ReferenceList.ReferenceList), 14)
 
-		args = []any{}
+			args = []any{}
 
-		for i := range rme.ReferenceList.ReferenceList {
-			item := rme.ReferenceList.ReferenceList[i]
-			rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
-			args = append(args,
-				item.ReferenceListID,
-				item.FirstName,
-				item.LastName,
-				item.Email,
-				item.PhoneNumber,
-				item.JobTitle,
-				item.Organization,
-				item.Type,
-				item.Address1,
-				item.Address2,
-				item.City,
-				item.State,
-				item.Zipcode,
-				item.Content)
-		}
+			for i := range rme.ReferenceList.ReferenceList {
+				item := rme.ReferenceList.ReferenceList[i]
+				rme.ReferenceList.ReferenceList[i].ReferenceListID = referenceListID
+				args = append(args,
+					item.ReferenceListID,
+					item.FirstName,
+					item.LastName,
+					item.Email,
+					item.PhoneNumber,
+					item.JobTitle,
+					item.Organization,
+					item.Type,
+					item.Address1,
+					item.Address2,
+					item.City,
+					item.State,
+					item.Zipcode,
+					item.Content)
+			}
 
-		result, err = tx.ExecContext(ctx, stmt, args...)
-		if err != nil {
-			errorChan <- err
-			err = tx.Rollback()
+			result, err = tx.ExecContext(ctx, stmt, args...)
 			if err != nil {
 				errorChan <- err
+				err = tx.Rollback()
+				if err != nil {
+					errorChan <- err
+				}
+				return
 			}
-			return
 		}
 
 		// commit

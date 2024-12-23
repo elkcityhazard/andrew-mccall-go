@@ -35,6 +35,18 @@ func (hr *HandlerRepo) HandlePostAdminResume(w http.ResponseWriter, r *http.Requ
 		"resume_contact-details_phone",
 	)
 
+	var employmentListKeys []string
+
+	var elPrefix = "resume_employment-list_"
+	employmentListKeys = append(employmentListKeys, elPrefix+"title", elPrefix+"from_date", elPrefix+"to_date", elPrefix+"job_title", elPrefix+"summary")
+
+	for i := 0; i < len(employmentListKeys); i++ {
+		var key = employmentListKeys[i]
+		if len(key) > 0 {
+			resumeForm.Required(employmentListKeys...)
+		}
+	}
+
 	if !resumeForm.IsEmail(resumeForm.Get("resume_contact-details_email")) {
 		resumeForm.Errors.Add("resume_contact-details_email", "invalid email address")
 	}

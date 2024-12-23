@@ -7,4 +7,4 @@ create table if not exists award_lists(
     constraint fk_award_lists_resume_id foreign key (resume_id) references resumes(id)
 );
 
-create index idx_award_lists_resume_id on award_lists(resume_id);
+create index idx_award_lists_resume_id on award_lists(resume_id); 

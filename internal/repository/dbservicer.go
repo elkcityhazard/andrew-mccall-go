@@ -32,4 +32,13 @@ type DBServicer interface {
 
 	//	Resume
 	InsertResume(rme *models.Resume) (int64, error)
+	GetResumeById(userID int64) (*models.Resume, error)
+	GetResumeObjective(resumeID int64) (*models.Objective, error)
+	GetResumeContactDetails(resumeID int64) (*models.ContactDetail, error)
+	GetResumeSocialMedia(resumeID int64) (*models.SocialMediaList, error)
+	GetAwardItems(resumeID int64) (*models.AwardsList, error)
+	GetSkillItems(resumeID int64) (*models.SkillList, error)
+	GetEmploymentList(resumeID int64) (*models.EmploymentList, error)
+	GetEducationList(resumeID int64) (*models.EducationList, error)
+	GetReferenceList(resumeID int64) (*models.ReferenceList, error)
 }

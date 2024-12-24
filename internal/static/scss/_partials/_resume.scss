@@ -1,0 +1,16 @@
+@layer typography {
+  [class*="resume__"] {
+    h1,
+    h2,
+     {
+      color: #ebbcba;
+    }
+    h3 {
+      color:#c4a7e7;
+      font-size:clamp(0.75rem, 0.5081rem + 1.5475vw, 1.25rem);
+    }
+    ul {
+      list-style: none;
+    }
+  }
+}

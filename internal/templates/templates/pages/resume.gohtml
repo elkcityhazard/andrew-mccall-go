@@ -15,13 +15,135 @@
             <li class="resume__contact-detail__list-item">{{.Firstname}} {{.Lastname}}</li>
             <li class="resume__contact-detail__list-item">{{.AddressLine1}} {{.AddressLine2}}</li>
             <li class="resume__contact-detail__list-item">{{.City}}, {{.State}} {{.Zipcode}}</li>
-            <li class="resume__contact-detail__list-item">{{.Email}} - {{.PhoneNumber}} - {{.WebAddress}}</li>
-
+            <li class="resume__contact-detail__list-item">{{.Email}} &mdash; {{.PhoneNumber}} &mdash; {{.WebAddress}}</li>
             </ul>
-
             </address>
             {{ end }}
+            {{ with .SocialMediaList }}
+            {{ with .SocialMediaListItems }}
+            <ul class="social-media__list-group">
+                {{ range . }}
+                <li class="social-media__list-item"><a href="{{.WebAddress}}" aria-label="link to: {{.UserName}} - {{.CompanyName}}" title="{{.UserName}} - {{.CompanyName}}">{{.UserName}} &mdash; {{.CompanyName}}</a></li>
+                {{ end }}
+                </ul>
+            {{ end }}
+            {{ end }}
         </section>
+        <section class="resume__objecive">
+        {{ with .Objective }}
+        <h2>Objective</h2>
+        <p class="resume__objective-content">{{.Content}}</p>
+        {{ end }}
+        </section>
+        {{ with .SkillList }}
+        <section class="resume__skill-list">
+        <h2>Skill List</h2>
+        {{ with .Items }}
+        <ul class="skill-list__list-group">
+            {{ range . }}
+                <li class="skill-list__list-item"><h3>{{.Title}}</h3></li>
+                <li class="skill-list__list-item"><strong>{{.Duration | formatPluralYear }}</strong></li>
+                <li class="skill-list__list-item"><p>{{.Content}}</p></li>
+            {{ end }}
+            </ul>
+        {{ end }}
+        </section>
+        {{ end }}
+
+        {{ with .EducationList }}
+            <section class="resume__education-list">
+                <h2>Education</h2>
+                {{ with .Education }}
+                <ul class="education-list__list-group">
+                    {{ range . }}
+                        <li class="education-list__list-item"><h3>{{.Name}}</h3></li>
+                        <li class="education-list__List-item">{{.Degree}} &mdash; {{.DegreeYear}}</li>
+                        <li class="education-list__List-item">
+                            <address class="education-list__address">
+                                <ul>
+                                    <li>{{.Address1 }} {{.Address2}}</li>
+                                    <li>{{.City}}, {{.State}} {{.Zipcode}}</li>
+                                </ul>
+                            </address>
+                        </li>
+                    {{ end }}
+                </ul>
+                {{ end }}
+            </section>
+        {{ end }}
+
+        {{ with .AwardsList }}
+        <section class="resume__awards-list">
+        <h2>Award List</h2>
+        {{ with .Awards }}
+        <ul class="awards-list__list-group">
+            {{ range . }}
+            <li class="awards-list__list-item"><h3>{{.Title}}</h3></li>
+            <li class="awards-list__list-item"><strong>Organization: </strong>{{.OrganizationName}}</li>
+            <li class="awards-list__list-item"><strong>Year: </strong>{{.Year}}</li>
+            <li class="awards-list__list-item"><p>{{.Content}}</p></li>
+            {{ end }}
+        </ul>
+        {{ end }}
+        </section>
+        {{ end }}
+
+        {{ with .EmploymentList }}
+            <section class="resume__employment-list">
+                <h2>Employment History</h2>
+                {{ with .Employers }}
+                    <ul class="employer-list__list-group">
+                        {{ range . }}
+                        <li class="employer-list__list-item">
+                            <h3>{{.Title}}</h3>
+                        </li>
+                        <li class="employer-list__list-item">
+                            <span>{{.From}}</span> &ndash; <span>{{.To}}</span> 
+                        </li>
+                        <li class="employer-list__list-item">
+                            <strong>{{.JobTitle}}</strong>
+                        </li>
+                        <li class="employer-list__list-item">
+                            <p>{{ .Summary }}</p>
+                        </li>
+                        {{ end }}
+                    </ul>
+                {{ end }}
+            </section>
+        {{ end }}
+
+        {{ with .ReferenceList }}
+            <section class="resume__reference-list">
+                <h2>References</h2>
+                {{ with .ReferenceList }}
+                    <ul class="reference-list__list-group">
+                        {{ range . }}
+                        <li class="reference-list__list-item">
+                            <h3>{{.FirstName}} {{.LastName}}</h3>
+                        </li>
+                        <li class="reference-list__list-item">
+                            <strong>{{.Email}}</strong> &mdash; <strong>{{.PhoneNumber}}</strong>
+                        </li>
+                        <li class="reference-list__list-item">
+                            <strong>{{.JobTitle}}</strong> &mdash; <strong>{{.Organization }}</strong>
+                        </li>
+                        <li class="reference-list__list-item">
+                            <strong>Type: </strong><span>{{.Type}}</span>
+                        </li>
+                        <li class="reference-list__list-item">
+                            {{.Address1}} {{.Address2}}
+                        </li>
+                        <li class="reference-list__list-item">
+                            <span>{{.City}}, {{.State}} {{.Zipcode}}</span>
+                        </li>
+                        <li class="reference-list__list-item">
+                            <p>{{.Content}}</p>
+                        </li>
+                        {{ end }}
+                    </ul>
+                {{ end }}
+            </section>
+        {{ end }}
 
     {{ end }}
 {{ end }}

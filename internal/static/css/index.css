@@ -378,6 +378,19 @@
     animation: fadeOut 500ms linear 5s forwards;
   }
 }
+@layer typography {
+  [class*=resume__] h1,
+  [class*=resume__] h2 {
+    color: #ebbcba;
+  }
+  [class*=resume__] h3 {
+    color: #c4a7e7;
+    font-size: clamp(0.75rem, 0.5081rem + 1.5475vw, 1.25rem);
+  }
+  [class*=resume__] ul {
+    list-style: none;
+  }
+}
 @layer base,layout,typography, partials, utilities;
 
 /*# sourceMappingURL=index.css.map */

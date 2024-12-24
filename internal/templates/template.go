@@ -37,6 +37,14 @@ var tFuncs = template.FuncMap{
 	"calculateOffset":    calculateOffset,
 	"toLower":            strings.ToLower,
 	"getCategoryName":    getCategoryName,
+	"formatPluralYear":   formatPluralYear,
+}
+
+func formatPluralYear(year int) string {
+	if year == 1 {
+		return fmt.Sprintf("%d year", year)
+	}
+	return fmt.Sprintf("%d years", year)
 }
 
 func getCategoryName(id int64) string {

@@ -1,5 +1,6 @@
 import { CategoryForm } from "./modules/categoryFormHandler.js";
 import { editorInit } from "./modules/editorConfig.js";
+import { ComposeSlugGeneration } from "./modules/handleSlugGeneration.js";
 import { InitResumeFormFields } from "./modules/initResumeForm.js";
 import { initNotificationRemoval } from "./modules/removeNotification.js";
 import { Resume } from "./modules/resume.js";
@@ -12,6 +13,7 @@ async function init() {
       var { data = {} } = data;
       var resumeForm = new Resume("resume");
       InitResumeFormFields(data, resumeForm);
+      ComposeSlugGeneration();
     });
     new CategoryForm("addCategory");
   } catch (err) {

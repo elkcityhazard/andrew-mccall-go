@@ -141,6 +141,7 @@ func routes() http.Handler {
 
 	rtr.New("POST", "/api/v1/upload/image", handlers.Repo.HandlePostUploadImage, requiresAuth, returnsJSON)
 	rtr.New("POST", "/api/v1/category", handlers.Repo.HandlePostCategory, requiresAuth, returnsJSON)
+	rtr.New("POST", "/api/v1/generate-slug", handlers.Repo.HandleGenerateSlug, requiresAuth, returnsJSON)
 
 	return rtr
 

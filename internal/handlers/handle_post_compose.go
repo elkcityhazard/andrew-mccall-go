@@ -5,6 +5,7 @@ import (
 	"html"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/forms"
@@ -59,6 +60,9 @@ func (hr *HandlerRepo) HandlePostCompose(w http.ResponseWriter, r *http.Request)
 	content.Title = html.EscapeString(formVals.Get("title"))
 	content.UserId = hr.app.SessionManager.GetInt64(r.Context(), "id")
 	content.Slug = html.EscapeString(formVals.Get("slug"))
+	if !strings.HasPrefix(content.Slug, "/") {
+		content.Slug = "/" + content.Slug
+	}
 	content.Description = html.EscapeString(formVals.Get("description"))
 	content.CreatedAt = time.Now()
 	content.UpdatedAt = time.Now()

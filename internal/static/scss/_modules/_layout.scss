@@ -7,4 +7,20 @@
     padding-inline: 1rem;
     padding: 1rem;
   }
+
+  .admin-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    @media screen and (min-width: 767px) {
+      grid-template-columns: minmax(10rem,25%) 1fr;
+      margin: auto;
+      > * {
+        max-width: calc(1500px / 2);
+      }
+    }
+    max-width: 1500px;
+    margin-inline: auto;
+    margin: auto;
+
+  }
 }

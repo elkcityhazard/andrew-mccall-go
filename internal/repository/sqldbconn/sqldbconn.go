@@ -810,6 +810,8 @@ func (sdc *SQLDbConn) InsertEditorContent(c *models.Content) (int64, error) {
 		return insertedID, nil
 	case err := <-errorChan:
 		return 0, err
+	case <-ctx.Done():
+		return 0, ctx.Err()
 	}
 
 }

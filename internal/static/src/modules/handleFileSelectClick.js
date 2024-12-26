@@ -43,5 +43,5 @@ export const handleFileSelectClick = async function () {
 };
 
 const handleReaderOnLoad = function (e) {
-  //console.log(e);
+  console.info("added photo");
 };

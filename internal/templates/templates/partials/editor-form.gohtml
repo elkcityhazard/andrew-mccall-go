@@ -14,7 +14,7 @@
     </div>
     <div class="form-control">
         <label for="slug">Slug:</label>
-        <input type="text" name="slug" id="slug" value="{{with .Form.Values.Get "slug"}}{{.}}{{end}}">
+        <input type="text" name="slug" id="slug" value="{{with .Form.Values.Get "slug"}}{{.}}{{end}}" disabled>
         {{ with .Form.Errors.Get "slug" }}
         <small class="error">{{ . }}</small>
         {{end}}

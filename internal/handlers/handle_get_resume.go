@@ -18,7 +18,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	resume, err := hr.conn.GetResumeById(userID)
 
 	if err != nil {
-		returnErr(w, err)
+		render.RenderTemplate(w, r, "404.gohtml", &models.TemplateData{})
 		return
 	}
 
@@ -34,8 +34,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	contactDetails, err := hr.conn.GetResumeContactDetails(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		contactDetails = models.NewContactDetail()
 	}
 
 	resume.ContactDetail = contactDetails
@@ -43,7 +42,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	socialList, err := hr.conn.GetResumeSocialMedia(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
+		socialList = models.NewSocialMediaList()
 		return
 	}
 	resume.SocialMediaList = socialList
@@ -51,16 +50,14 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	awardList, err := hr.conn.GetAwardItems(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		awardList = models.NewAwardsList()
 	}
 	resume.AwardsList = awardList
 
 	skillList, err := hr.conn.GetSkillItems(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		skillList = models.NewSkillList()
 	}
 
 	resume.SkillList = skillList
@@ -68,8 +65,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	employmentList, err := hr.conn.GetEmploymentList(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		employmentList = models.NewEmploymentList()
 	}
 
 	resume.EmploymentList = employmentList
@@ -77,8 +73,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	educationList, err := hr.conn.GetEducationList(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		educationList = models.NewEducationList()
 	}
 
 	resume.EducationList = educationList
@@ -86,8 +81,7 @@ func (hr *HandlerRepo) HandleGetResume(w http.ResponseWriter, r *http.Request) {
 	refList, err := hr.conn.GetReferenceList(resume.ID)
 
 	if err != nil {
-		returnErr(w, err)
-		return
+		refList = models.NewReferenceList()
 	}
 
 	resume.ReferenceList = refList

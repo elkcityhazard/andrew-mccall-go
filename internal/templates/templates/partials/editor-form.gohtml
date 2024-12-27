@@ -1,5 +1,4 @@
 {{ define "editor-form" }}
-
 {{$currentCat := .Form.Values.Get "category"}}
 
 <form data-id="{{with .IntMap.PostID}}{{.}}{{end}}" action="{{with .StringMap.Action}}{{.}}{{else}}/admin/compose{{end}}" method="{{with .StringMap.Method}}{{.}}{{else}}POST{{end}}" enctype="multipart/form-data" class="editor-form" id="editorForm">
@@ -14,7 +13,7 @@
     </div>
     <div class="form-control">
         <label for="slug">Slug:</label>
-        <input type="text" name="slug" id="slug" value="{{with .Form.Values.Get "slug"}}{{.}}{{end}}" disabled>
+        <input type="text" name="slug" id="slug" value="{{with .Form.Values.Get "slug"}}{{.}}{{end}}" readonly>
         {{ with .Form.Errors.Get "slug" }}
         <small class="error">{{ . }}</small>
         {{end}}
@@ -40,8 +39,9 @@
     {{with .Data.Categories}}
     {{range . }}
 
-    {{$nameToLower := .Name | toLower}}
-    <option value="{{.ID}}"{{if eq $nameToLower $currentCat}} selected {{end }}>{{.Name}}</option>
+    {{$nameToLower := .Name | toLower }}
+    {{ $currentToLower := $currentCat | toLower }}
+    <option value="{{.ID}}"{{if (eq $nameToLower $currentToLower)  }} selected {{end }}>{{.Name}}</option>
     {{ end }}
     {{ end }}
 

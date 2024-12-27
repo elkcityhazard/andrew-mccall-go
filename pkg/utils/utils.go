@@ -18,6 +18,7 @@ func NewUtil() *Util {
 	return &Util{}
 }
 
+// CreateJSONEnvelope assigns a key to a new map and fills it with data
 func (u *Util) CreateJSONEnvelope(key string, data any) map[string]any {
 	if len(key) < 1 {
 		key = "data"

@@ -81,6 +81,7 @@ func (hr *HandlerRepo) HandlePostCompose(w http.ResponseWriter, r *http.Request)
 	catId, err := strconv.ParseInt(formVals.Get("category"), 10, 64)
 
 	if err != nil {
+		catId = 0
 		hr.app.SessionManager.Put(r.Context(), "warning", "there was an error parsing the category")
 		http.Redirect(w, r.WithContext(r.Context()), "/admin", http.StatusSeeOther)
 		return

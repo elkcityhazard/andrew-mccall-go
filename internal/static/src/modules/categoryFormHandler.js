@@ -1,3 +1,5 @@
+import { Notyf } from "notyf";
+
 class CategoryForm {
   constructor(id) {
     this.id = id;
@@ -28,6 +30,11 @@ class CategoryForm {
         body: JSON.stringify(cat),
       })
         .then((resp) => resp.json())
+        .then((data) => {
+          if (data.error) {
+          }
+          return data;
+        })
         .catch((err) => err);
 
       if (catResp.category_name != null) {

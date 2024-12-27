@@ -12,6 +12,7 @@ type Category struct {
 
 func NewCategory() *Category {
 	return &Category{
+		Name:      "",
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 		Version:   1,

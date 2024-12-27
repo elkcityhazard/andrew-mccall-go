@@ -39,11 +39,30 @@ func (hr *HandlerRepo) HandleGetEditCompose(w http.ResponseWriter, r *http.Reque
 
 	var data = map[string]interface{}{}
 
+	category, err := hr.conn.GetCategoryByPostID(post.ID)
+
+	if err != nil {
+		category = models.NewCategory()
+	}
+
+	f.Set("category", category.Name)
+
+	categories, err := hr.conn.ListCategories()
+
+	if err != nil {
+		categories = nil
+	}
+
+	data["Post"] = post
+	data["PostCategory"] = category
+	data["Categories"] = categories
 	data["EditorContent"] = post.Delta
 
 	var intMap = map[string]int{}
 
 	intMap["PostID"] = int(post.ID)
+
+	fmt.Printf("%+v\n\n", data)
 
 	render.RenderTemplate(w, r, "compose.gohtml", &models.TemplateData{
 		StringMap: stringMap,

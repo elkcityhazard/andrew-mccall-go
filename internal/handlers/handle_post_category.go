@@ -36,6 +36,19 @@ func (hr *HandlerRepo) HandlePostCategory(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	if len(cat.Name) < 1 {
+
+		errPayload := util.CreateJSONEnvelope("error", errors.New("invalid category name").Error())
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(errPayload)
+		if err != nil {
+			returnErr(w, err)
+			return
+		}
+		return
+	}
+
 	catID, err := hr.conn.InsertCategory(cat)
 
 	if err != nil {

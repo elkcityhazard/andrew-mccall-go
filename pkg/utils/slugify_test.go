@@ -49,6 +49,11 @@ func TestSlugify(t *testing.T) {
 		have: "!This is Cool!",
 		want: u.GenerateDateSlug() + "/this-is-cool",
 	})
+	tests = append(tests, slugifyTests{
+		name: "Starts With Trailing Slash",
+		have: "/some cool slug",
+		want: fmt.Sprintf("%s/some-cool-slug", u.GenerateDateSlug()),
+	})
 
 	for _, v := range tests {
 		t.Run(v.name, func(t *testing.T) {

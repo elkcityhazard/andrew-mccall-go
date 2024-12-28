@@ -1,9 +1,13 @@
-package utils
+package utils_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/elkcityhazard/andrew-mccall-go/pkg/utils"
+)
 
 func Test_CheckPWStrength(t *testing.T) {
-	u := NewUtil()
+	u := utils.NewUtil()
 
 	type pwStrenthTest struct {
 		name      string

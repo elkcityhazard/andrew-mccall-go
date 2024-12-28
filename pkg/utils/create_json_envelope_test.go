@@ -1,12 +1,14 @@
-package utils
+package utils_test
 
 import (
 	"errors"
 	"testing"
+
+	"github.com/elkcityhazard/andrew-mccall-go/pkg/utils"
 )
 
 func Test_CreateJSONEnvelope(t *testing.T) {
-	u := NewUtil()
+	u := utils.NewUtil()
 
 	type testCase struct {
 		name     string

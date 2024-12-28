@@ -1,14 +1,16 @@
-package utils
+package utils_test
 
 import (
 	"fmt"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/elkcityhazard/andrew-mccall-go/pkg/utils"
 )
 
 func TestSlugify(t *testing.T) {
-	u := NewUtil()
+	u := utils.NewUtil()
 	type slugifyTests struct {
 		name string
 		have string
@@ -61,7 +63,7 @@ func TestSlugify(t *testing.T) {
 
 func Test_GenerateDateSlug(t *testing.T) {
 
-	u := NewUtil()
+	u := utils.NewUtil()
 	year := time.Now().Year()
 	month := int(time.Now().Month())
 	day := time.Now().Day()

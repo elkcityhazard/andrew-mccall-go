@@ -14,6 +14,7 @@ import (
 type Util struct {
 }
 
+// NewUtil returns a new utility instance and exposes the methods
 func NewUtil() *Util {
 	return &Util{}
 }
@@ -63,6 +64,7 @@ func (u *Util) ResizeImage(rdr io.Reader, wtr io.Writer, mimetype string, width 
 
 }
 
+// CheckPWStrength does some exremely basic pass word strenth checks and returns a bool if it passes or not
 func (u *Util) CheckPWStrength(pw string, minLength int) bool {
 
 	if len(pw) < minLength {

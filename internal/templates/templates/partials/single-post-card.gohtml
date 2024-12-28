@@ -10,7 +10,7 @@
             <ul>
             <li><strong>published: </strong>{{.CreatedAt | humanDate}}</li>
             <li><strong>updated: </strong>{{.UpdatedAt | humanDate}}</li>
-            <li><strong>by: </strong>{{.UserId | fetchUser | unsafeHTML }}</li>
+            <li><strong>by: </strong>{{with .User}}{{with .Username}}{{. | unsafeHTML }}{{ end }}{{ end }}</li>
 
             <li><strong>category: </strong>{{ if ne .Category nil }}{{with .Category.Name}}{{ . | unsafeHTML }}{{end}}{{end}}</li>
 

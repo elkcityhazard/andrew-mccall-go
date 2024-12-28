@@ -199,3 +199,42 @@ func Test_humanDate(t *testing.T) {
 	}
 
 }
+
+func Test_unsafeHTML(t *testing.T) {
+
+	testHTML := `<script>alert("hello world");</script>`
+
+	out := unsafeHTML(testHTML)
+
+	if !strings.Contains(out, "&lt;script&gt;") {
+		t.Fatal("Expected out to contain &lt;script&gt;")
+	}
+
+}
+
+func Test_parseQuillContent(t *testing.T) {
+	testContent := `<p>hello world</p>`
+
+	out := parseQuillContent(testContent)
+
+	if !strings.EqualFold(string(out), testContent) {
+		t.Fatal("out should equal test content")
+	}
+
+}
+
+func Test_GetTEmplateDir(t *testing.T) {
+	templateDir := GetTemplateDir()
+
+	if templateDir == nil {
+		t.Fatal("Expected templateDir to not be nil but got nil")
+	}
+}
+
+func Test_BuildTemplateCache(t *testing.T) {
+	mockTC := BuildTemplateCache()
+
+	if mockTC == nil {
+		t.Fatal("Expected tc to not be nil, but got nil")
+	}
+}

@@ -21,6 +21,14 @@ func (hr *HandlerRepo) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	user, err := hr.conn.GetUserByID(post.UserId)
+
+	if err != nil {
+		returnErr(w, err)
+		return
+	}
+	post.User = user
+
 	cat, err := hr.conn.GetCategoryByPostID(post.ID)
 
 	if err != nil {

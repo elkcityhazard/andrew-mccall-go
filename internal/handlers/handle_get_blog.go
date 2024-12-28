@@ -37,6 +37,15 @@ func (hr *HandlerRepo) HandleGetBlog(w http.ResponseWriter, r *http.Request) {
 		}
 
 		posts[i].Category = cat
+
+		user, err := hr.conn.GetUserByID(v.UserId)
+
+		if err != nil {
+			hr.app.MsgChan <- err.Error()
+			posts[i].User = &models.User{}
+		}
+
+		posts[i].User = user
 	}
 
 	count, err := hr.conn.GetTotalCount("posts")

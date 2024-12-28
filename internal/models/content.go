@@ -5,9 +5,10 @@ import (
 )
 
 type Content struct {
-	ID          int64
-	UserId      int64
-	UserEmail   string
+	ID        int64
+	UserId    int64
+	UserEmail string
+	*User
 	Title       string
 	Slug        string
 	Description string

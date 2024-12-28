@@ -34,7 +34,6 @@ var tFuncs = template.FuncMap{
 	"parseEditorContent": parseQuillContent,
 	"unsafeHTML":         unsafeHTML,
 	"humanDate":          humanDate,
-	"fetchUser":          fetchUser,
 	"calculateLimit":     calculateLimit,
 	"calculateOffset":    calculateOffset,
 	"toLower":            strings.ToLower,
@@ -91,15 +90,6 @@ func calculateOffset(limit, offset, count int, increment bool) int {
 	return off
 }
 
-func fetchUser(id int64) string {
-
-	user, err := templateRepo.GetUserByID(id)
-
-	if err != nil {
-		return ""
-	}
-	return user.Username
-}
 func humanDate(datetime time.Time) string {
 	return datetime.Format("Jan 02, 2006")
 }

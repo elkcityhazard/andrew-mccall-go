@@ -27,6 +27,8 @@ func (hr *HandlerRepo) HandleGetPost(w http.ResponseWriter, r *http.Request) {
 		cat = &models.Category{}
 	}
 
+	post.Category = cat
+
 	prevPost, err := hr.conn.GetNextPrevPost(post, false)
 
 	if err != nil {

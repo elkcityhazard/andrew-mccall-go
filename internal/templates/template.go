@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/elkcityhazard/andrew-mccall-go/internal/repository"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/repository/sqldbconn"
 )
 
@@ -21,9 +22,10 @@ var (
 	templatePartialDir = "templates/partials"
 )
 
-// templateRepo is a ne wsqldbconn to fetch the user and utilize any other dbservicers
-var templateRepo *sqldbconn.SQLDbConn
+// templateRepo is a new sqldbconn to fetch the user and utilize any other dbservicers
+var templateRepo repository.DBServicer
 
+// SetTemplateSQLDbRepo gives the template package access to the sql db connection
 func SetTemplateSQLDbRepo(sq *sqldbconn.SQLDbConn) {
 	templateRepo = sq
 }
@@ -36,24 +38,19 @@ var tFuncs = template.FuncMap{
 	"calculateLimit":     calculateLimit,
 	"calculateOffset":    calculateOffset,
 	"toLower":            strings.ToLower,
-	"getCategoryName":    getCategoryName,
 	"formatPluralYear":   formatPluralYear,
 }
 
 func formatPluralYear(year int) string {
+
+	if year < 0 {
+		year = -year
+	}
+
 	if year == 1 {
 		return fmt.Sprintf("%d year", year)
 	}
 	return fmt.Sprintf("%d years", year)
-}
-
-func getCategoryName(id int64) string {
-	cat, err := templateRepo.GetCategoryByPostID(id)
-
-	if err != nil {
-		return ""
-	}
-	return cat.Name
 }
 
 func calculateLimit(limit, offset, count int, increment bool) int {

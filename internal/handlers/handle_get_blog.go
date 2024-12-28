@@ -28,6 +28,17 @@ func (hr *HandlerRepo) HandleGetBlog(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	for i, v := range posts {
+		cat, err := hr.conn.GetCategoryByPostID(v.ID)
+
+		if err != nil {
+			hr.app.MsgChan <- err.Error()
+			posts[i].Category = models.NewCategory()
+		}
+
+		posts[i].Category = cat
+	}
+
 	count, err := hr.conn.GetTotalCount("posts")
 
 	if err != nil {

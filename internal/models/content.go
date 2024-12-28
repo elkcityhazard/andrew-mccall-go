@@ -11,10 +11,11 @@ type Content struct {
 	Title       string
 	Slug        string
 	Description string
-	Content     string
-	Delta       string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	Version     int64
-	Status      string
+	*Category
+	Content   string
+	Delta     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	Version   int64
+	Status    string
 }

@@ -4,9 +4,10 @@
             <li><strong>published: </strong>{{.CreatedAt | humanDate}}</li>
             <li><strong>updated: </strong>{{.UpdatedAt | humanDate}}</li>
             <li><strong>by: </strong>{{.UserId | fetchUser | unsafeHTML }}</li>
-            {{ $catName := .ID | getCategoryName}}
-            {{ if ne $catName ""}}
-            <li><strong>category: </strong>{{ $catName | unsafeHTML}}</li>
+            {{ if ne .Category nil}}
+            {{ with .Category.Name }}
+            <li><strong>category: </strong>{{ . | unsafeHTML}}</li>
+            {{ end }}
             {{ end }}
         </ul>
     </div>

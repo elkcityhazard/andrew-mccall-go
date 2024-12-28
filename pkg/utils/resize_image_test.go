@@ -65,13 +65,17 @@ func Test_ResizeImage(t *testing.T) {
 			err = u.ResizeImage(infile, outfile, v.mockDetectedFiletype, 250)
 
 			if err != nil {
-				if filepath.Ext(v.inFilepath) == ".webp" {
-					if !strings.Contains(err.Error(), "invalid") {
-						t.Fatalf("expected invalid JPEG format: missing SOI marker, but got %s", err.Error())
+
+				if !strings.Contains(err.Error(), "invalid") {
+					errorMsg := "expected invalid JPEG format: missing SOI marker"
+					t.Fatalf("%s, but got %s", errorMsg, err.Error())
+				} else {
+					if filepath.Ext(v.inFilepath) == ".webp" {
+						return
 					}
-					return
+					t.Fatalf("expected an error where ther should be none")
 				}
-				t.Fatalf("expected an error where ther should be none")
+
 			}
 
 		})

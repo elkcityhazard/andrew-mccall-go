@@ -112,7 +112,7 @@ func startServer(app *config.AppConfig) {
 
 	fmt.Printf("Starting server on: %s\n", app.Port)
 
-	rtr := amrouter.NewRouter(app)
+	rtr := amrouter.NewRouter()
 
 	rtr.PathToStaticDir = "/internal/static"
 

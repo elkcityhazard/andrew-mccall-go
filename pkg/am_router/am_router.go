@@ -8,24 +8,9 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-
-	"github.com/elkcityhazard/andrew-mccall-go/internal/config"
 )
 
-var (
-	app            *config.AppConfig
-	RouteParamsKey = &CtxKey{name: "routeParams"}
-)
-
-// Update CtxKey to include a name for debugging
-type CtxKey struct {
-	name string
-}
-
-// String makes CtxKey implement the Stringer interface
-func (k *CtxKey) String() string {
-	return "amrouter context key " + k.name
-}
+type CtxKey struct{}
 
 type AMRouter struct {
 	PathToStaticDir   string
@@ -36,8 +21,8 @@ type AMRouter struct {
 	GlobalMiddleware  []MiddleWareFunc
 }
 
-func NewRouter(cfg *config.AppConfig) *AMRouter {
-	app = cfg
+func NewRouter() *AMRouter {
+
 	return &AMRouter{
 		Routes:           []AMRoute{},
 		Middleware:       []MiddleWareFunc{},
@@ -102,7 +87,7 @@ func (rtr *AMRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			}
 			// Store route parameters in context if needed
 
-			ctx := context.WithValue(r.Context(), RouteParamsKey, matches[1:])
+			ctx := context.WithValue(r.Context(), CtxKey{}, matches[1:])
 			r = r.WithContext(ctx)
 
 			var handler http.Handler = route.Handler

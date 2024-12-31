@@ -4,6 +4,7 @@ import (
 	"context"
 	"embed"
 	"errors"
+	"fmt"
 	"net/http"
 	"regexp"
 	"strings"
@@ -121,12 +122,21 @@ func (rtr *AMRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(allow) > 0 {
-		w.Header().Set("Allow", strings.Join(allow, ", "))
-		w.WriteHeader(405)
-		err := errors.New("405 method not allowed")
-		http.Error(w, err.Error(), http.StatusMethodNotAllowed)
+
+		var customErrFunc http.Handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Allow", strings.Join(allow, ", "))
+			w.WriteHeader(405)
+			err := errors.New("405 method not allowed")
+			fmt.Fprint(w, err.Error())
+		})
+
+		customErrFunc = rtr.AddMiddlewareToHandler(customErrFunc, rtr.GlobalMiddleware...)
+		customErrFunc.ServeHTTP(w, r)
+		return
+
 	} else {
 		rtr.Custom404Handler(w, r)
+		return
 	}
 }
 

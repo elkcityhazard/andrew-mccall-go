@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -14,18 +15,19 @@ func LoadSession(next http.Handler) http.Handler {
 func returnsJSON(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		next.ServeHTTP(w, r.WithContext(r.Context()))
+		next.ServeHTTP(w, r)
 	})
 }
 
 func requiresAuth(next http.Handler) http.Handler {
+	fmt.Println("Fires requiresAuth")
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		isValidSession := app.SessionManager.Exists(r.Context(), "id")
 		if !isValidSession {
-			http.Redirect(w, r.WithContext(r.Context()), "/login", http.StatusSeeOther)
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}
-		next.ServeHTTP(w, r.WithContext(r.Context()))
+		next.ServeHTTP(w, r)
 	})
 
 }
@@ -48,18 +50,18 @@ func stripTrailingSlash(next http.Handler) http.Handler {
 		p := r.URL.Path
 		switch true {
 		case p == "/" && len(p) < 2:
-			next.ServeHTTP(w, r.WithContext(r.Context()))
+			next.ServeHTTP(w, r)
 		// handle dir browsing
 		case strings.HasPrefix(p, "/static/"):
 			if p[len(p)-1:] == "/" {
 				http.NotFound(w, r)
 				return
 			}
-			next.ServeHTTP(w, r.WithContext(r.Context()))
+			next.ServeHTTP(w, r)
 		case p[len(p)-1:] == "/":
-			http.Redirect(w, r.WithContext(r.Context()), p[:len(p)-1], http.StatusSeeOther)
+			http.Redirect(w, r, p[:len(p)-1], http.StatusSeeOther)
 		default:
-			next.ServeHTTP(w, r.WithContext(r.Context()))
+			next.ServeHTTP(w, r)
 		}
 	})
 }

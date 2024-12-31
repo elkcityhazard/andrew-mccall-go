@@ -19,6 +19,7 @@ import (
 	"github.com/elkcityhazard/andrew-mccall-go/internal/render"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/repository/sqldbconn"
 	"github.com/elkcityhazard/andrew-mccall-go/internal/templates"
+	amrouter "github.com/elkcityhazard/andrew-mccall-go/pkg/am_router"
 )
 
 const (
@@ -111,9 +112,20 @@ func startServer(app *config.AppConfig) {
 
 	fmt.Printf("Starting server on: %s\n", app.Port)
 
+	rtr := amrouter.NewRouter(app)
+
+	rtr.PathToStaticDir = "/internal/static"
+
+	rtr.Use(LoadSession)
+	rtr.Use(stripTrailingSlash)
+	rtr.Use(csrfToken)
+
+	rtr.AddRoute("GET", "/", handlers.Repo.HomeGetHandler)
+
 	srv := &http.Server{
-		Addr:              app.Port,
-		Handler:           LoadSession(csrfToken(stripTrailingSlash(routes()))),
+		Addr: app.Port,
+		//Handler:           LoadSession(csrfToken(stripTrailingSlash(routes()))),
+		Handler:           rtr,
 		IdleTimeout:       TIMEOUT_DURATION,
 		WriteTimeout:      TIMEOUT_DURATION,
 		ReadTimeout:       TIMEOUT_DURATION,

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/elkcityhazard/andrew-mccall-go/internal/config"
@@ -45,6 +46,8 @@ func (hr *HandlerRepo) HomeGetHandler(w http.ResponseWriter, r *http.Request) {
 		returnErr(w, err)
 		return
 	}
+
+	fmt.Println("posts", posts)
 
 	data["Posts"] = posts
 

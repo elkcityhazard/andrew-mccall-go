@@ -120,7 +120,7 @@ func startServer(app *config.AppConfig) {
 	rtr.Use(stripTrailingSlash)
 	rtr.Use(csrfToken)
 
-	rtr.AddRoute("GET", "/", handlers.Repo.HomeGetHandler)
+	rtr.AddRoute("GET", "/", handlers.Repo.HomeGetHandler, requiresAuth)
 
 	srv := &http.Server{
 		Addr: app.Port,

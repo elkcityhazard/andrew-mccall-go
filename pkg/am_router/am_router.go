@@ -99,25 +99,20 @@ func (rtr *AMRouter) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				allow = append(allow, route.Method)
 				continue
 			}
+			// Store route parameters in context if needed
+
+			ctx := context.WithValue(r.Context(), RouteParamsKey, matches[1:])
+			r = r.WithContext(ctx)
+
 			var handler http.Handler = route.Handler
 
 			// middleware gets handled outside in, so add route based first, then global
 			if len(route.Middleware) > 0 {
-				for i := len(route.Middleware) - 1; i >= 0; i-- {
-					handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-						route.Middleware[i](handler).ServeHTTP(w, r)
-					})
-				}
+				handler = rtr.AddMiddlewareToHandler(handler, route.Middleware...)
 			}
 
-			// Store route parameters in context if needed
-			if len(matches) > 1 {
-				ctx := context.WithValue(r.Context(), RouteParamsKey, matches[1:])
-				r = r.WithContext(ctx)
-			}
-
-			for i := len(rtr.GlobalMiddleware) - 1; i >= 0; i-- {
-				handler = rtr.GlobalMiddleware[i](handler)
+			if len(rtr.GlobalMiddleware) > 0 {
+				handler = rtr.AddMiddlewareToHandler(handler, rtr.GlobalMiddleware...)
 			}
 
 			handler.ServeHTTP(w, r)
